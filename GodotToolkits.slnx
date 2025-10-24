@@ -1,1 +1,15 @@
-<Solution />
+<Solution>
+	<Project Path="GeneratorUtils\GeneratorUtils.csproj" Type="Classic C#" />
+	<Project
+		Path="GodotToolkits.MVVM\GodotToolkits.MVVM.Sample\GodotToolkits.MVVM.Sample.csproj"
+		Type="Classic C#"
+	/>
+	<Project
+		Path="GodotToolkits.MVVM\GodotToolkits.MVVM.Tests\GodotToolkits.MVVM.Tests.csproj"
+		Type="Classic C#"
+	/>
+	<Project
+		Path="GodotToolkits.MVVM\GodotToolkits.MVVM\GodotToolkits.MVVM.csproj"
+		Type="Classic C#"
+	/>
+</Solution>
