@@ -35,19 +35,18 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		var indexes = GetIndexes([.. lines.Skip(1)]);
 
 		context.AddSource(
-			$"{fileName}.Generated.cs",
-			BuildCode(indexes, fileName, _namespace)
+			$"{fileName}.Index.Generated.cs",
+			BuildIndexClass(fileName, indexes, _namespace)
 		);
 	}
 
-	public static string BuildCode(
-		List<string> indexes,
+	public static string BuildIndexClass(
 		string className,
+		List<string> indexes,
 		string? @namespace = null
 	)
 	{
 		var code = new StringBuilder();
-		code.AppendLine(AttributeStringBuild.GeneratedTitle);
 		if (!string.IsNullOrEmpty(@namespace))
 			code.AppendLine($"namespace {@namespace};");
 		code.AppendLine();
