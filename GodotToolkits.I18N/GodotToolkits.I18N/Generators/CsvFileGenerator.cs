@@ -38,6 +38,39 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 			$"{fileName}.Index.Generated.cs",
 			BuildIndexClass(fileName, indexes, _namespace)
 		);
+		context.AddSource(
+			$"{fileName}.Generated.cs",
+			BuildContentClass(fileName, GetCsvData(lines), _namespace)
+		);
+	}
+
+	public static string BuildContentClass(
+		string className,
+		List<CsvContent> data,
+		string? @namespace = null
+	)
+	{
+		var code = new StringBuilder();
+		if (!string.IsNullOrEmpty(@namespace))
+			code.AppendLine($"namespace {@namespace};");
+		code.AppendLine("using global::System.Collections.Generic;");
+		code.AppendLine();
+		code.AppendLine($"public static class {className} {{");
+		foreach (var content in data)
+		{
+			code.AppendLine(
+				$"\tpublic static Dictionary<string, string> {content.Index} => new () {{"
+			);
+			foreach (var tuple in content.Data)
+			{
+				var key = tuple.Key;
+				var value = tuple.Value;
+				code.AppendLine($"\t\t{{\"{key}\", \"{value}\"}},");
+			}
+			code.AppendLine("\t};");
+		}
+		code.AppendLine("}");
+		return code.ToString();
 	}
 
 	public static string BuildIndexClass(
@@ -62,6 +95,25 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		return code.ToString();
 	}
 
+	public static List<CsvContent> GetCsvData(string[] csvLines)
+	{
+		var titles = csvLines[0].Split(',');
+		var data = new List<CsvContent>();
+		for (var i = 1; i < csvLines.Length; i++)
+		{
+			var values = csvLines[i].Split(',');
+			var content = new CsvContent { Index = values[0], Data = [] };
+			for (var j = 1; j < values.Length; j++)
+			{
+				content.Data[titles[j]] = values[j];
+			}
+
+			data.Add(content);
+		}
+
+		return data;
+	}
+
 	public static List<string> GetIndexes(string[] csvLines)
 	{
 		var indexes = new List<string>();
@@ -72,5 +124,16 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		}
 
 		return indexes;
+	}
+
+	public sealed class CsvContent
+	{
+		public string Index { get; set; } = "";
+		public Dictionary<string, string> Data { get; set; } = [];
+
+		public override string ToString()
+		{
+			return $"{Index}: {string.Join(", ", Data.Select(pair => $"{pair.Key}: {pair.Value}"))}";
+		}
 	}
 }
