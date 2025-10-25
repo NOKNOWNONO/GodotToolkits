@@ -7,7 +7,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Utils;
 using ProjectInfo = Utils.ProjectInfo;
 
-
 namespace GodotToolkits.MVVM.Generators;
 
 [Generator(LanguageNames.CSharp)]

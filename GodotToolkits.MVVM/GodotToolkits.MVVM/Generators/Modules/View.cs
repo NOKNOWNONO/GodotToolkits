@@ -1,6 +1,6 @@
 using System;
-using Utils;
 using Microsoft.CodeAnalysis;
+using Utils;
 using ProjectInfo = Utils.ProjectInfo;
 
 namespace GodotToolkits.MVVM.Generators.Modules;

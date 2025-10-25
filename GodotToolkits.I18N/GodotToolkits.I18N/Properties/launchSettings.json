@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "DebugRoslynSourceGenerator": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "../GodotToolkits.I18N.Sample/GodotToolkits.I18N.Sample.csproj"
+    }
+  }
+}

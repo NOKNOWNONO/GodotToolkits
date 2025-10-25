@@ -1,25 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<IsPackable>false</IsPackable>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
 		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+		<IncludeBuiltProjectOutputGroup>false</IncludeBuiltProjectOutputGroup>
 		<IsRoslynComponent>true</IsRoslynComponent>
-		<RootNamespace>GodotToolkits.MVVM</RootNamespace>
-		<PackageId>GodotToolkits.MVVM</PackageId>
-		<PackageReadmeFile>Readme.md</PackageReadmeFile>
-		<Title>GodotToolkits.MVVM</Title>
-		<Version>0.1.0</Version>
-		<Authors>NOKNOWNONO</Authors>
-		<Product>GodotToolkits.MVVM</Product>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<DebugType>portable</DebugType>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<DebugType>portable</DebugType>
+		<RootNamespace>GodotToolkits.I18N</RootNamespace>
+		<PackageId>GodotToolkits.I18N</PackageId>
+		<Version>0.0.1</Version>
+		<Title>GodotToolkits.I18N</Title>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">

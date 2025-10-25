@@ -1,5 +1,4 @@
-﻿
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
 using Utils;
 using ProjectInfo = Utils.ProjectInfo;
 
@@ -9,8 +8,7 @@ namespace GodotToolkits.MVVM.Generators.Modules;
 public sealed class BaseViewModel : IIncrementalGenerator
 {
 	public const string ClassName = "BaseViewModel";
-	public static readonly string Namespace =
-		ProjectInfo.Title;
+	public static readonly string Namespace = ProjectInfo.Title;
 
 	public static string BuildCode()
 	{
