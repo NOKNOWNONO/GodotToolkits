@@ -1,4 +1,4 @@
-﻿namespace GeneratorUtils;
+﻿namespace Utils;
 
 public static class AttributeStringBuild
 {
