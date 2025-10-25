@@ -1,6 +1,7 @@
-﻿using GeneratorUtils;
+﻿
 using Microsoft.CodeAnalysis;
-using ProjectInfo = GeneratorUtils.ProjectInfo;
+using Utils;
+using ProjectInfo = Utils.ProjectInfo;
 
 namespace GodotToolkits.MVVM.Generators.Modules;
 
@@ -8,7 +9,8 @@ namespace GodotToolkits.MVVM.Generators.Modules;
 public sealed class BaseViewModel : IIncrementalGenerator
 {
 	public const string ClassName = "BaseViewModel";
-	public static readonly string Namespace = ProjectInfo.RootNamespace;
+	public static readonly string Namespace =
+		ProjectInfo.Title;
 
 	public static string BuildCode()
 	{
@@ -18,7 +20,8 @@ namespace {Namespace};
 using global::System;
 
 {AttributeStringBuild.GeneratedCode(
-	$"{ProjectInfo.RootNamespace}.Generators.Modules.BaseViewModel", ProjectInfo.Version)}
+	$"{Namespace}.Generators.Modules.BaseViewModel", ProjectInfo.
+	Version)}
 public abstract class {ClassName}
 {{
 }}";
