@@ -29,7 +29,13 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 	)
 	{
 		var fileName = Path.GetFileNameWithoutExtension(source.Path);
-		var lines = source.GetText()?.ToString().Split('\n') ?? [];
+		var lines =
+			source
+				.GetText()
+				?.ToString()
+				.Split('\n')
+				.Where(line => !string.IsNullOrEmpty(line))
+				.ToArray() ?? [];
 		if (lines.Length < 2)
 			return;
 		var indexes = GetIndexes([.. lines.Skip(1)]);
@@ -56,6 +62,17 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		code.AppendLine("using global::System.Collections.Generic;");
 		code.AppendLine();
 		code.AppendLine($"public static class {className} {{");
+		code.AppendLine();
+		code.AppendLine(
+			$"\tpublic static List<Dictionary<string, string>> Data => ["
+		);
+		foreach (var csvContent in data)
+		{
+			code.AppendLine($"\t\t{csvContent.Index},");
+		}
+
+		code.AppendLine("\t];");
+		code.AppendLine();
 		foreach (var content in data)
 		{
 			code.AppendLine(
@@ -67,8 +84,11 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 				var value = tuple.Value;
 				code.AppendLine($"\t\t{{\"{key}\", \"{value}\"}},");
 			}
+
 			code.AppendLine("\t};");
+			code.AppendLine();
 		}
+
 		code.AppendLine("}");
 		return code.ToString();
 	}
@@ -83,7 +103,14 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		if (!string.IsNullOrEmpty(@namespace))
 			code.AppendLine($"namespace {@namespace};");
 		code.AppendLine();
-		code.AppendLine($"public static class {className}Index {{");
+		code.AppendLine("#if GODOT");
+		code.AppendLine("using global::Godot;");
+		code.AppendLine("[GlobalClass]");
+		code.AppendLine("public static class {className}Index : RefCounted");
+		code.AppendLine("#else");
+		code.AppendLine($"public static class {className}Index");
+		code.AppendLine("#endif");
+		code.AppendLine("{");
 		foreach (
 			var index in indexes.Where(index => !string.IsNullOrEmpty(index))
 		)
@@ -103,9 +130,9 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		{
 			var values = csvLines[i].Split(',');
 			var content = new CsvContent { Index = values[0], Data = [] };
-			for (var j = 1; j < values.Length; j++)
+			for (var j = 0; j < values.Length; j++)
 			{
-				content.Data[titles[j]] = values[j];
+				content.Data[titles[j]] = values[j].Replace("\"", "\\\"");
 			}
 
 			data.Add(content);
