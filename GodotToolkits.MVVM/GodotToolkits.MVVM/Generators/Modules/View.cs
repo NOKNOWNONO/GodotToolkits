@@ -1,7 +1,7 @@
 using System;
-using GeneratorUtils;
 using Microsoft.CodeAnalysis;
-using ProjectInfo = GeneratorUtils.ProjectInfo;
+using Utils;
+using ProjectInfo = Utils.ProjectInfo;
 
 namespace GodotToolkits.MVVM.Generators.Modules;
 
@@ -10,7 +10,7 @@ public sealed class View : IIncrementalGenerator
 {
 	public const string AttributeName = "View";
 	public const string ClassName = "ViewAttribute";
-	public static readonly string Namespace = ProjectInfo.RootNamespace;
+	public static readonly string Namespace = ProjectInfo.Title;
 
 	public static string BuildCode()
 	{
@@ -22,7 +22,7 @@ using global::System;
 [AttributeUsage(AttributeTargets.Class)]
 {AttributeStringBuild.GeneratedCode
 (
-	$"{ProjectInfo.RootNamespace}.Generators.Modules.View"
+	$"{ProjectInfo.Title}.Generators.Modules.View"
 	, ProjectInfo.Version
 )}
 

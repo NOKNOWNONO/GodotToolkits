@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using System.Text;
-using GeneratorUtils;
 using GodotToolkits.MVVM.Generators.Modules;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using ProjectInfo = GeneratorUtils.ProjectInfo;
+using Utils;
+using ProjectInfo = Utils.ProjectInfo;
 
 namespace GodotToolkits.MVVM.Generators;
 
@@ -14,7 +14,7 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 {
 	public static readonly string GeneratedCode =
 		AttributeStringBuild.GeneratedCode(
-			$"{ProjectInfo.RootNamespace}.Generators.ObservablePropertyGenerator",
+			$"{ProjectInfo.Title}.Generators.ObservablePropertyGenerator",
 			ProjectInfo.Version
 		);
 

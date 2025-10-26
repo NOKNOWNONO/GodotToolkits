@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<RootNamespace>GodotToolkits.I18N.Sample</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference
+			Include="..\GodotToolkits.I18N\GodotToolkits.I18N.csproj"
+			OutputItemType="Analyzer"
+			ReferenceOutputAssembly="false"
+		/>
+	</ItemGroup>
+	<ItemGroup>
+		<AdditionalFiles Include="**\*.csv" />
+	</ItemGroup>
+</Project>

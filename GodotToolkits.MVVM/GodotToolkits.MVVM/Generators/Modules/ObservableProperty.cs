@@ -1,6 +1,6 @@
-﻿using GeneratorUtils;
-using Microsoft.CodeAnalysis;
-using ProjectInfo = GeneratorUtils.ProjectInfo;
+﻿using Microsoft.CodeAnalysis;
+using Utils;
+using ProjectInfo = Utils.ProjectInfo;
 
 namespace GodotToolkits.MVVM.Generators.Modules;
 
@@ -9,7 +9,7 @@ public sealed class ObservableProperty : IIncrementalGenerator
 {
 	public const string AttributeName = "ObservableProperty";
 	public const string ClassName = "ObservablePropertyAttribute";
-	public static readonly string Namespace = ProjectInfo.RootNamespace;
+	public static readonly string Namespace = ProjectInfo.Title;
 
 	public static string BuildCode()
 	{
@@ -20,7 +20,7 @@ using global::System;
 
 [AttributeUsage(AttributeTargets.Field)]
 {AttributeStringBuild.GeneratedCode(
-	$"{ProjectInfo.RootNamespace}.Generators.Modules.ObservableProperty"
+	$"{ProjectInfo.Title}.Generators.Modules.ObservableProperty"
 	, ProjectInfo.Version
 )}
 public class {ClassName} : Attribute

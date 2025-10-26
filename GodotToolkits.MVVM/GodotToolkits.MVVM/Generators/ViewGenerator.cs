@@ -1,10 +1,10 @@
 using System;
 using System.Text;
-using GeneratorUtils;
 using GodotToolkits.MVVM.Generators.Modules;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using ProjectInfo = GeneratorUtils.ProjectInfo;
+using Utils;
+using ProjectInfo = Utils.ProjectInfo;
 
 namespace GodotToolkits.MVVM.Generators;
 
@@ -13,7 +13,7 @@ public sealed class ViewGenerator : IIncrementalGenerator
 {
 	public static readonly string GeneratedCode =
 		AttributeStringBuild.GeneratedCode(
-			$"{ProjectInfo.RootNamespace}.Generators.ViewGenerator",
+			$"{ProjectInfo.Title}.Generators.ViewGenerator",
 			ProjectInfo.Version
 		);
 

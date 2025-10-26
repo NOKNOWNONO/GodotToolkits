@@ -1,5 +1,16 @@
 <Solution>
-	<Project Path="GeneratorUtils\GeneratorUtils.csproj" Type="Classic C#" />
+	<Project
+		Path="GodotToolkits.I18N\GodotToolkits.I18N.Sample\GodotToolkits.I18N.Sample.csproj"
+		Type="Classic C#"
+	/>
+	<Project
+		Path="GodotToolkits.I18N\GodotToolkits.I18N.Tests\GodotToolkits.I18N.Tests.csproj"
+		Type="Classic C#"
+	/>
+	<Project
+		Path="GodotToolkits.I18N\GodotToolkits.I18N\GodotToolkits.I18N.csproj"
+		Type="Classic C#"
+	/>
 	<Project
 		Path="GodotToolkits.MVVM\GodotToolkits.MVVM.Sample\GodotToolkits.MVVM.Sample.csproj"
 		Type="Classic C#"
