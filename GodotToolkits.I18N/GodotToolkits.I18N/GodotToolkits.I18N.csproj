@@ -9,7 +9,7 @@
 		<IsRoslynComponent>true</IsRoslynComponent>
 		<RootNamespace>GodotToolkits.I18N</RootNamespace>
 		<PackageId>GodotToolkits.I18N</PackageId>
-		<Version>0.0.1</Version>
+		<Version>1.0.0</Version>
 		<Title>GodotToolkits.I18N</Title>
 	</PropertyGroup>
 	<ItemGroup>
