@@ -28,7 +28,7 @@ public sealed class ObservableDictionary : IIncrementalGenerator
 						nameof(ObservableDictionary)
 					)
 					.Replace(
-						"GodotToolkits.MVVM.Templates;",
+						"GodotToolkits.MVVM.Templates",
 						"GodotToolkits.MVVM.Collections"
 					)
 					.Replace("//GeneratedCode", GeneratedCode)

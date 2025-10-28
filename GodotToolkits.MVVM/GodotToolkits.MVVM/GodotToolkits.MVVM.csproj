@@ -10,7 +10,7 @@
 		<PackageId>GodotToolkits.MVVM</PackageId>
 		<PackageReadmeFile>Readme.md</PackageReadmeFile>
 		<Title>GodotToolkits.MVVM</Title>
-		<Version>0.1.0</Version>
+		<Version>0.2.1</Version>
 		<Authors>NOKNOWNONO</Authors>
 		<Product>GodotToolkits.MVVM</Product>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
