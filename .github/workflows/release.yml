@@ -41,6 +41,6 @@ jobs:
         with:
           files: |
             packages/GodotToolkits.*.nupkg
+          tag_name: "Release_$(date +'%Y%m%d%H%M%S')"
           draft: false
           prerelease: false
-          tag_name: Release_$(date +'%Y%m%d%H%M%S')
