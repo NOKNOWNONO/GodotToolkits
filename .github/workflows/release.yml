@@ -1,0 +1,45 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build-and-release-specific:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore i18n project
+        run: dotnet restore src/GodotToolkits.I18N/GodotToolkits.I18N.csproj
+
+      - name: Restore mvvm project
+        run: dotnet restore src/GodotToolkits.Mvvm/GodotToolkits.Mvvm.csproj
+
+
+      - name: Build i18n project
+        run: dotnet build src/GodotToolkits.I18N/GodotToolkits.I18N.csproj --configuration Release --no-restore
+
+      - name: Build mvvm project
+        run: dotnet build src/GodotToolkits.Mvvm/GodotToolkits.Mvvm.csproj --configuration Release --no-restore
+
+      - name: Release project
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            packages/GodotToolkits.*.nupkg
+          draft: false
+          prerelease: false
+          tag_name: Release_$(date +'%Y%m%d%H%M%S')
