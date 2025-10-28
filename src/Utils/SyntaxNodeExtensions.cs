@@ -13,25 +13,23 @@ public static class SyntaxNodeExtensions
 		var parent = node.Parent;
 		return parent switch
 		{
-			null                                       => null,
-			NamespaceDeclarationSyntax nds             => nds.Name.ToString(),
+			null => null,
+			NamespaceDeclarationSyntax nds => nds.Name.ToString(),
 			FileScopedNamespaceDeclarationSyntax fsnds => fsnds.Name.ToString(),
-			_                                          => GetNamespace(parent),
+			_ => GetNamespace(parent),
 		};
 	}
-
 
 	public static (
 		NamespaceDeclarationSyntax?,
 		FileScopedNamespaceDeclarationSyntax?
-		) GetNamespaceNode(this SyntaxNode node)
+	) GetNamespaceNode(this SyntaxNode node)
 	{
 		return (
 			GetNamespaceDeclaration(node),
 			GetFileScopedNamespaceDeclaration(node)
 		);
 	}
-
 
 	public static NamespaceDeclarationSyntax? GetNamespaceDeclaration(
 		this SyntaxNode node
@@ -40,12 +38,11 @@ public static class SyntaxNodeExtensions
 		var parent = node.Parent;
 		return parent switch
 		{
-			null                           => null,
+			null => null,
 			NamespaceDeclarationSyntax nds => nds,
-			_                              => GetNamespaceDeclaration(parent),
+			_ => GetNamespaceDeclaration(parent),
 		};
 	}
-
 
 	public static List<UsingDirectiveSyntax> GetUsings(this SyntaxNode node)
 	{
@@ -55,11 +52,9 @@ public static class SyntaxNodeExtensions
 		return usings;
 	}
 
-
-	public static FileScopedNamespaceDeclarationSyntax?
-		GetFileScopedNamespaceDeclaration(
-			this SyntaxNode node
-		)
+	public static FileScopedNamespaceDeclarationSyntax? GetFileScopedNamespaceDeclaration(
+		this SyntaxNode node
+	)
 	{
 		var parent = node.Parent;
 		return parent switch
@@ -70,14 +65,12 @@ public static class SyntaxNodeExtensions
 		};
 	}
 
-
 	public static bool HasAttribute(this SyntaxNode node, string attributeName)
 	{
 		return node.DescendantNodes()
 			.OfType<AttributeSyntax>()
 			.Any(a => a.Name.ToString() == attributeName);
 	}
-
 
 	public static bool HasNode(this SyntaxNode node, SyntaxKind kind)
 	{

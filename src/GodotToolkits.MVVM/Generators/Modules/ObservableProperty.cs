@@ -7,10 +7,9 @@ namespace GodotToolkits.MVVM.Generators.Modules;
 [Generator(LanguageNames.CSharp)]
 public sealed class ObservableProperty : IIncrementalGenerator
 {
-	public const           string AttributeName = "ObservableProperty";
-	public const           string ClassName     = "ObservablePropertyAttribute";
-	public static readonly string Namespace     = ProjectInfo.Title;
-
+	public const string AttributeName = "ObservableProperty";
+	public const string ClassName = "ObservablePropertyAttribute";
+	public static readonly string Namespace = ProjectInfo.Title;
 
 	public static string BuildCode()
 	{
@@ -31,14 +30,11 @@ public class {ClassName} : Attribute
 ";
 	}
 
-
 	public void Initialize(IncrementalGeneratorInitializationContext context)
 	{
-		context.RegisterPostInitializationOutput
-		(post =>
-			{
-				post.AddSource($"{ClassName}.g.cs", BuildCode());
-			}
-		);
+		context.RegisterPostInitializationOutput(post =>
+		{
+			post.AddSource($"{ClassName}.g.cs", BuildCode());
+		});
 	}
 }

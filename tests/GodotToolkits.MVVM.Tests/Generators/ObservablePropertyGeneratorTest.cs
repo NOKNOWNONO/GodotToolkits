@@ -14,12 +14,10 @@ public class ObservablePropertyGeneratorTest
 		Assert.Equal(result, expected);
 	}
 
-
 	[Fact]
 	public void GetOnPropertyChanged()
 	{
-		var result = ObservablePropertyGenerator.GetOnPropertyChanged
-		(
+		var result = ObservablePropertyGenerator.GetOnPropertyChanged(
 			"Test",
 			"string"
 		);

@@ -11,39 +11,31 @@ public sealed class ObservableCollection : IIncrementalGenerator
 		AttributeStringBuild.GeneratedTitle;
 
 	public static readonly string GeneratedCode =
-		AttributeStringBuild.GeneratedCode
-		(
+		AttributeStringBuild.GeneratedCode(
 			$"{ProjectInfo.Title}.Modules.{nameof(ObservableCollection)}",
 			ProjectInfo.Version
 		);
 
-
 	public void Initialize(IncrementalGeneratorInitializationContext context)
 	{
-		context.RegisterPostInitializationOutput
-		(f =>
-			{
-				f.AddSource
-				(
-					$"{nameof(ObservableCollection)}.g.cs",
-					GenCode
-						.Replace
-						(
-							$"T{nameof(ObservableCollection)}",
-							nameof(ObservableCollection)
-						)
-						.Replace
-						(
-							"GodotToolkits.MVVM.Templates",
-							"GodotToolkits.MVVM.Collections"
-						)
-						.Replace("//GeneratedCode", GeneratedCode)
-						.Replace("//GeneratedTitle", GeneratedTitle)
-				);
-			}
-		);
+		context.RegisterPostInitializationOutput(f =>
+		{
+			f.AddSource(
+				$"{nameof(ObservableCollection)}.g.cs",
+				GenCode
+					.Replace(
+						$"T{nameof(ObservableCollection)}",
+						nameof(ObservableCollection)
+					)
+					.Replace(
+						"GodotToolkits.MVVM.Templates",
+						"GodotToolkits.MVVM.Collections"
+					)
+					.Replace("//GeneratedCode", GeneratedCode)
+					.Replace("//GeneratedTitle", GeneratedTitle)
+			);
+		});
 	}
-
 
 	public const string GenCode =
 		$@"//GeneratedTitle

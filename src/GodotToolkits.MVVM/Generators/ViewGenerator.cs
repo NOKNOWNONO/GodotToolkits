@@ -12,19 +12,16 @@ namespace GodotToolkits.MVVM.Generators;
 public sealed class ViewGenerator : IIncrementalGenerator
 {
 	public static readonly string GeneratedCode =
-		AttributeStringBuild.GeneratedCode
-		(
+		AttributeStringBuild.GeneratedCode(
 			$"{ProjectInfo.Title}.Generators.ViewGenerator",
 			ProjectInfo.Version
 		);
 
-
 	public void Initialize(IncrementalGeneratorInitializationContext context)
 	{
 		var classNodes = context
-			.SyntaxProvider.CreateSyntaxProvider
-			(
-				predicate: static (s,   _) => s is ClassDeclarationSyntax,
+			.SyntaxProvider.CreateSyntaxProvider(
+				predicate: static (s, _) => s is ClassDeclarationSyntax,
 				transform: static (ctx, _) => (ClassDeclarationSyntax)ctx.Node
 			)
 			.Where(c => c.HasAttribute(View.AttributeName));
@@ -32,13 +29,12 @@ public sealed class ViewGenerator : IIncrementalGenerator
 		context.RegisterSourceOutput(classNodes, GenerateCode);
 	}
 
-
 	private void GenerateCode(
 		SourceProductionContext context,
-		ClassDeclarationSyntax  node
+		ClassDeclarationSyntax node
 	)
 	{
-		var className     = node.Identifier.Text;
+		var className = node.Identifier.Text;
 		var namespaceName = node.GetNamespace();
 
 		var classBuilder = new StringBuilder();
@@ -59,7 +55,6 @@ public sealed class ViewGenerator : IIncrementalGenerator
 		context.AddSource($"{className}View.g.cs", classBuilder.ToString());
 	}
 
-
 	public static string GetInitializeComponentsComment()
 	{
 		return @"
@@ -69,7 +64,6 @@ public sealed class ViewGenerator : IIncrementalGenerator
 	/// </summary>
 	";
 	}
-
 
 	public static string GetInitializeBindingsComment()
 	{

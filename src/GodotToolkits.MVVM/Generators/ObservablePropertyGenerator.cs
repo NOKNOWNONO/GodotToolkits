@@ -14,8 +14,7 @@ namespace GodotToolkits.MVVM.Generators;
 public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 {
 	public static readonly string GeneratedCode =
-		AttributeStringBuild.GeneratedCode
-		(
+		AttributeStringBuild.GeneratedCode(
 			$"{ProjectInfo.Title}.Generators.ObservablePropertyGenerator",
 			ProjectInfo.Version
 		);
@@ -25,22 +24,18 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 
 	public const string FullAction = "global::System.Action";
 
-
 	public void Initialize(IncrementalGeneratorInitializationContext context)
 	{
 		var classNodes = context
-			.SyntaxProvider.CreateSyntaxProvider
-			(
-				predicate: static (s,   _) => s is ClassDeclarationSyntax,
+			.SyntaxProvider.CreateSyntaxProvider(
+				predicate: static (s, _) => s is ClassDeclarationSyntax,
 				transform: static (ctx, _) => (ClassDeclarationSyntax)ctx.Node
 			)
 			.Where(static c => c.HasNode(SyntaxKind.FieldDeclaration))
-			.Where
-			(static c =>
+			.Where(static c =>
 				c.ChildNodes()
 					.OfType<FieldDeclarationSyntax>()
-					.Any
-					(static f =>
+					.Any(static f =>
 						f.HasAttribute(ObservableProperty.AttributeName)
 					)
 			)
@@ -49,14 +44,13 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 		context.RegisterSourceOutput(classNodes, GenerateCode);
 	}
 
-
 	private void GenerateCode(
-		SourceProductionContext                          context,
+		SourceProductionContext context,
 		(ClassDeclarationSyntax Left, Compilation Right) source
 	)
 	{
 		var (node, compilation) = source;
-		var className     = node.Identifier.Text;
+		var className = node.Identifier.Text;
 		var namespaceName = node.GetNamespace();
 		var semanticModel = compilation.GetSemanticModel(node.SyntaxTree);
 		var fields = node.ChildNodes()
@@ -72,22 +66,20 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 		classBuilder.AppendLine("{");
 		foreach (var field in fields)
 		{
-			var variable   = field.Declaration.Variables.First();
-			var typeInfo   = semanticModel.GetTypeInfo(field.Declaration.Type);
+			var variable = field.Declaration.Variables.First();
+			var typeInfo = semanticModel.GetTypeInfo(field.Declaration.Type);
 			var typeSymbol = typeInfo.Type;
 			if (typeSymbol == null)
 			{
 				var declared =
-					semanticModel.GetDeclaredSymbol
-					(
+					semanticModel.GetDeclaredSymbol(
 						field.Declaration.Variables.First()
 					) as IFieldSymbol;
 				typeSymbol = declared?.Type;
 			}
 
 			var globalName =
-				typeSymbol?.ToDisplayString
-				(
+				typeSymbol?.ToDisplayString(
 					SymbolDisplayFormat.FullyQualifiedFormat
 				) ?? field.Declaration.Type.ToString();
 
@@ -95,56 +87,46 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 			classBuilder.Append(BuildBindingPooling(fieldName, globalName, 1));
 			classBuilder.Append(BuildBindingFunc(fieldName, globalName, 1));
 			classBuilder.Append(BuildUnBindingFunc(fieldName, globalName, 1));
-			classBuilder.Append
-			(
+			classBuilder.Append(
 				BuildUnBindingAllFunc(fieldName, globalName, 1)
 			);
 			classBuilder.Append(BuildSetPropertyFunc(fieldName, globalName, 1));
 			classBuilder.Append(BuildProperty(fieldName, globalName, 1));
-			classBuilder.Append
-			(
-				BuildOnPropertyChangingOneArgPartialFunc
-				(
+			classBuilder.Append(
+				BuildOnPropertyChangingOneArgPartialFunc(
 					fieldName,
 					globalName,
 					1
 				)
 			);
-			classBuilder.Append
-			(
-				BuildOnPropertyChangingTwoArgPartialFunc
-				(
+			classBuilder.Append(
+				BuildOnPropertyChangingTwoArgPartialFunc(
 					fieldName,
 					globalName,
 					1
 				)
 			);
-			classBuilder.Append
-			(
+			classBuilder.Append(
 				BuildOnPropertyChangedPartialFunc(fieldName, globalName, 1)
 			);
 		}
 
 		classBuilder.AppendLine("}");
-		context.AddSource
-		(
+		context.AddSource(
 			$"{className}Properties.g.cs",
 			classBuilder.ToString()
 		);
 	}
 
-
 	public static string BuildIndent(int count) => new('\t', count);
-
 
 	public static string GetBackBindingPoolingName(string fieldName) =>
 		$"G_back_{fieldName}_binding_pooling_G";
 
-
 	public static string BuildBindingPooling(
 		string fieldName,
 		string fieldType,
-		byte   indentCount
+		byte indentCount
 	)
 	{
 		return $@"
@@ -154,11 +136,10 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 ";
 	}
 
-
 	public static string BuildUnBindingFunc(
 		string fieldName,
 		string fieldType,
-		byte   indentCount
+		byte indentCount
 	)
 	{
 		return $@"
@@ -171,11 +152,10 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 ";
 	}
 
-
 	public static string BuildUnBindingAllFunc(
 		string fieldName,
 		string fieldType,
-		byte   indentCount
+		byte indentCount
 	)
 	{
 		return $@"
@@ -188,11 +168,10 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 ";
 	}
 
-
 	public static string BuildBindingFunc(
 		string fieldName,
 		string fieldType,
-		byte   indentCount
+		byte indentCount
 	)
 	{
 		return $@"
@@ -205,11 +184,10 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 ";
 	}
 
-
 	public static string BuildSetPropertyFunc(
 		string fieldName,
 		string fieldType,
-		byte   indentCount
+		byte indentCount
 	)
 	{
 		var propertyName = GetPropertyName(fieldName);
@@ -235,11 +213,10 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 ";
 	}
 
-
 	public static string BuildProperty(
 		string fieldName,
 		string fieldType,
-		byte   indentCount
+		byte indentCount
 	)
 	{
 		var propertyName = GetPropertyName(fieldName);
@@ -255,11 +232,10 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 ";
 	}
 
-
 	public static string BuildOnPropertyChangingTwoArgPartialFunc(
 		string fieldName,
 		string fieldType,
-		byte   indentCount
+		byte indentCount
 	)
 	{
 		return $@"
@@ -269,11 +245,10 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 ";
 	}
 
-
 	public static string BuildOnPropertyChangingOneArgPartialFunc(
 		string fieldName,
 		string fieldType,
-		byte   indentCount
+		byte indentCount
 	)
 	{
 		return $@"
@@ -283,11 +258,10 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 ";
 	}
 
-
 	private static string BuildOnPropertyChangedPartialFunc(
 		string fieldName,
 		string fieldType,
-		byte   indentCount
+		byte indentCount
 	)
 	{
 		return $@"
@@ -297,7 +271,6 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 ";
 	}
 
-
 	public static string GetOnPropertyChanged(
 		string propertyName,
 		string fieldType
@@ -305,7 +278,6 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 	{
 		return $"partial void On{propertyName}Changed({fieldType} newValue);";
 	}
-
 
 	public static string GetPropertyName(string fieldName)
 	{

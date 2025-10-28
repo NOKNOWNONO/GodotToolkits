@@ -14,20 +14,17 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 {
 	private readonly string _namespace = ProjectInfo.Title;
 
-
 	public void Initialize(IncrementalGeneratorInitializationContext context)
 	{
-		var files = context.AdditionalTextsProvider.Where
-		(file =>
+		var files = context.AdditionalTextsProvider.Where(file =>
 			file.Path.EndsWith(".csv")
 		);
 		context.RegisterSourceOutput(files, GenerateCode);
 	}
 
-
 	private void GenerateCode(
 		SourceProductionContext context,
-		AdditionalText          source
+		AdditionalText source
 	)
 	{
 		var fileName = Path.GetFileNameWithoutExtension(source.Path);
@@ -42,23 +39,20 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 			return;
 		var indexes = GetIndexes([.. lines.Skip(1)]);
 
-		context.AddSource
-		(
+		context.AddSource(
 			$"{fileName}.Index.Generated.cs",
 			BuildIndexClass(fileName, indexes, _namespace)
 		);
-		context.AddSource
-		(
+		context.AddSource(
 			$"{fileName}.Generated.cs",
 			BuildContentClass(fileName, GetCsvData(lines), _namespace)
 		);
 	}
 
-
 	public static string BuildContentClass(
-		string           className,
+		string className,
 		List<CsvContent> data,
-		string?          @namespace = null
+		string? @namespace = null
 	)
 	{
 		var code = new StringBuilder();
@@ -68,8 +62,7 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		code.AppendLine();
 		code.AppendLine($"public static class {className} {{");
 		code.AppendLine();
-		code.AppendLine
-		(
+		code.AppendLine(
 			$"\tpublic static List<Dictionary<string, string>> Data => ["
 		);
 		foreach (var csvContent in data)
@@ -81,14 +74,13 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		code.AppendLine();
 		foreach (var content in data)
 		{
-			code.AppendLine
-			(
+			code.AppendLine(
 				$"\tpublic static Dictionary<string, string> @{content.Index} => new()"
 			);
 			code.AppendLine("\t{");
 			foreach (var tuple in content.Data)
 			{
-				var key   = tuple.Key;
+				var key = tuple.Key;
 				var value = tuple.Value;
 				code.AppendLine($"\t\t{{\"{key}\", \"{value}\"}},");
 			}
@@ -101,11 +93,10 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		return code.ToString();
 	}
 
-
 	public static string BuildIndexClass(
-		string       className,
+		string className,
 		List<string> indexes,
-		string?      @namespace = null
+		string? @namespace = null
 	)
 	{
 		var code = new StringBuilder();
@@ -131,7 +122,6 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		return code.ToString();
 	}
 
-
 	public static List<CsvContent> GetCsvData(string[] csvLines)
 	{
 		var titles = csvLines[0]
@@ -141,7 +131,7 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		var data = new List<CsvContent>();
 		for (var i = 1; i < csvLines.Length; i++)
 		{
-			var values  = csvLines[i].Split(',');
+			var values = csvLines[i].Split(',');
 			var content = new CsvContent { Index = values[0], Data = [] };
 			for (var j = 0; j < titles.Length; j++)
 			{
@@ -153,7 +143,6 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 
 		return data;
 	}
-
 
 	public static List<string> GetIndexes(string[] csvLines)
 	{
@@ -167,17 +156,14 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		return indexes;
 	}
 
-
 	public sealed class CsvContent
 	{
-		public string                     Index { get; set; } = "";
-		public Dictionary<string, string> Data  { get; set; } = [];
-
+		public string Index { get; set; } = "";
+		public Dictionary<string, string> Data { get; set; } = [];
 
 		public override string ToString()
 		{
-			return
-				$"{Index}: {string.Join(", ", Data.Select(pair => $"{pair.Key}: {pair.Value}"))}";
+			return $"{Index}: {string.Join(", ", Data.Select(pair => $"{pair.Key}: {pair.Value}"))}";
 		}
 	}
 }

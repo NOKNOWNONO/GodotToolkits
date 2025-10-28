@@ -7,9 +7,8 @@ namespace GodotToolkits.MVVM.Generators.Modules;
 [Generator(LanguageNames.CSharp)]
 public sealed class BaseViewModel : IIncrementalGenerator
 {
-	public const           string ClassName = "BaseViewModel";
+	public const string ClassName = "BaseViewModel";
 	public static readonly string Namespace = ProjectInfo.Title;
-
 
 	public static string BuildCode()
 	{
@@ -27,14 +26,11 @@ public abstract class {ClassName}
 }}";
 	}
 
-
 	public void Initialize(IncrementalGeneratorInitializationContext context)
 	{
-		context.RegisterPostInitializationOutput
-		(post =>
-			{
-				post.AddSource($"{ClassName}.g.cs", BuildCode());
-			}
-		);
+		context.RegisterPostInitializationOutput(post =>
+		{
+			post.AddSource($"{ClassName}.g.cs", BuildCode());
+		});
 	}
 }

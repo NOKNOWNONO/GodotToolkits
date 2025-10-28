@@ -6,8 +6,7 @@ namespace Utils;
 public static class ProjectInfo
 {
 	public static string Version => GetAssemblyVersion();
-	public static string Title   => GetAssemblyTitle();
-
+	public static string Title => GetAssemblyTitle();
 
 	private static string GetAssemblyVersion()
 	{
@@ -17,7 +16,6 @@ public static class ProjectInfo
 		return attribute?.Version
 			?? throw new NullReferenceException("Version attribute is null");
 	}
-
 
 	public static string GetAssemblyTitle()
 	{
