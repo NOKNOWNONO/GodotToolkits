@@ -68,7 +68,7 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		);
 		foreach (var csvContent in data)
 		{
-			code.AppendLine($"\t\t{csvContent.Index},");
+			code.AppendLine($"\t\t@{csvContent.Index},");
 		}
 
 		code.AppendLine("\t];");
@@ -76,8 +76,9 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		foreach (var content in data)
 		{
 			code.AppendLine(
-				$"\tpublic static Dictionary<string, string> {content.Index} => new () {{"
+				$"\tpublic static Dictionary<string, string> @{content.Index} => new()"
 			);
+			code.AppendLine("\t{");
 			foreach (var tuple in content.Data)
 			{
 				var key = tuple.Key;
@@ -106,7 +107,7 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		code.AppendLine("#if GODOT");
 		code.AppendLine("using global::Godot;");
 		code.AppendLine("[GlobalClass]");
-		code.AppendLine("public static class {className}Index : RefCounted");
+		code.AppendLine($"public static class {className}Index : RefCounted");
 		code.AppendLine("#else");
 		code.AppendLine($"public static class {className}Index");
 		code.AppendLine("#endif");
@@ -124,13 +125,16 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 
 	public static List<CsvContent> GetCsvData(string[] csvLines)
 	{
-		var titles = csvLines[0].Split(',');
+		var titles = csvLines[0]
+			.Split(',')
+			.Select(title => title.Trim())
+			.ToArray();
 		var data = new List<CsvContent>();
 		for (var i = 1; i < csvLines.Length; i++)
 		{
 			var values = csvLines[i].Split(',');
 			var content = new CsvContent { Index = values[0], Data = [] };
-			for (var j = 0; j < values.Length; j++)
+			for (var j = 0; j < titles.Length; j++)
 			{
 				content.Data[titles[j]] = values[j].Replace("\"", "\\\"");
 			}
