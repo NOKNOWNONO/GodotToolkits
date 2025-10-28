@@ -1,0 +1,1 @@
+﻿# GodotToolkits.I18N

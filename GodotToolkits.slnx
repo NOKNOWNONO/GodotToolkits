@@ -1,26 +1,8 @@
 <Solution>
-	<Project
-		Path="GodotToolkits.I18N\GodotToolkits.I18N.Sample\GodotToolkits.I18N.Sample.csproj"
-		Type="Classic C#"
-	/>
-	<Project
-		Path="GodotToolkits.I18N\GodotToolkits.I18N.Tests\GodotToolkits.I18N.Tests.csproj"
-		Type="Classic C#"
-	/>
-	<Project
-		Path="GodotToolkits.I18N\GodotToolkits.I18N\GodotToolkits.I18N.csproj"
-		Type="Classic C#"
-	/>
-	<Project
-		Path="GodotToolkits.MVVM\GodotToolkits.MVVM.Sample\GodotToolkits.MVVM.Sample.csproj"
-		Type="Classic C#"
-	/>
-	<Project
-		Path="GodotToolkits.MVVM\GodotToolkits.MVVM.Tests\GodotToolkits.MVVM.Tests.csproj"
-		Type="Classic C#"
-	/>
-	<Project
-		Path="GodotToolkits.MVVM\GodotToolkits.MVVM\GodotToolkits.MVVM.csproj"
-		Type="Classic C#"
-	/>
+  <Project Path="samples\GodotToolkits.I18N.Sample\GodotToolkits.I18N.Sample.csproj" Type="Classic C#" />
+  <Project Path="samples\GodotToolkits.MVVM.Sample\GodotToolkits.MVVM.Sample.csproj" Type="Classic C#" />
+  <Project Path="src\GodotToolkits.I18N\GodotToolkits.I18N.csproj" Type="Classic C#" />
+  <Project Path="src\GodotToolkits.MVVM\GodotToolkits.MVVM.csproj" Type="Classic C#" />
+  <Project Path="tests\GodotToolkits.I18N.Tests\GodotToolkits.I18N.Tests.csproj" Type="Classic C#" />
+  <Project Path="tests\GodotToolkits.MVVM.Tests\GodotToolkits.MVVM.Tests.csproj" Type="Classic C#" />
 </Solution>
