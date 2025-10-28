@@ -41,6 +41,6 @@ jobs:
         with:
           files: |
             packages/GodotToolkits.*.nupkg
-          tag_name: "Release_${{  format('{0:yyyyMMddHHmmss}', fromJson(github.event.head_commit.timestamp)) }}"
+          tag_name: "Release_${{ github.sha }}"
           draft: false
           prerelease: false
