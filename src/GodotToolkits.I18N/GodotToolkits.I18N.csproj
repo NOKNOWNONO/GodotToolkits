@@ -6,19 +6,10 @@
 		<IsRoslynComponent>true</IsRoslynComponent>
 		<RootNamespace>GodotToolkits.I18N</RootNamespace>
 		<!-- Nuget Package -->
-		<Version>1.0.2</Version>
+		<Version>1.0.3</Version>
 		<PackageTags>Godot;dotnet;csharp;.NET;roslyn;</PackageTags>
 		<Description>一个用与给Csv文件生成翻译资源的工具.</Description>
 	</PropertyGroup>
-	<ItemGroup>
-		<!-- 打包所有输出DLL到analyzers目录 -->
-		<None
-			Include="$(OutputPath)\*.dll"
-			Pack="true"
-			PackagePath="analyzers/dotnet/cs"
-			Visible="false"
-		/>
-	</ItemGroup>
 	<ItemGroup>
 		<PackageReference
 			Include="Microsoft.CodeAnalysis.Analyzers"
