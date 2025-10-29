@@ -7,6 +7,7 @@
 		<GeneratePackageOnBuild Condition="'$(DesignTimeBuild)' != 'true'"
 			>true</GeneratePackageOnBuild
 		>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
 		<PackageId>$(RootNamespace)</PackageId>
 		<Title>$(RootNamespace)</Title>
 		<Authors>NOKNOWNONO</Authors>
