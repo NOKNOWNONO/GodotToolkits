@@ -2,10 +2,10 @@ using System;
 
 namespace GodotToolkits.MVVM.Sample;
 
-// [View]
+[View]
 public partial class FooView
 {
-	// partial void InitializeBindings() { }
+	partial void InitializeBindings() { }
 
-	// partial void InitializeComponents() { }
+	partial void InitializeComponents() { }
 }
