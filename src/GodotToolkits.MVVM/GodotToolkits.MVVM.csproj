@@ -8,6 +8,7 @@
 		<!-- Nuget Package -->
 		<Version>0.2.1</Version>
 		<PackageTags>Godot;MVVM;csharp;roslyn;dotnet;.net;</PackageTags>
+		<Description>一个参照CommunityToolkit.Mvvm制作的给Godot使用的MVVM工具</Description>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">
