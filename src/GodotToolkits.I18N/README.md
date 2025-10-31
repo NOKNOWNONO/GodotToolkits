@@ -2,6 +2,12 @@
 
 为项目中所有属性为`AdditionalFiles`的csv文件,生成对应的翻译文件
 
+## 配置
+
+在项目文件夹下添加`.godotoolkits`文件
+
+`GenerateContentClass=false` 是否生成内容类,默认为`true`
+
 ## 生成示例
 
 在项目中创建一个csv文件,命名为`foo.csv`，并修改属性为`AdditionalFiles`,内容如下:
