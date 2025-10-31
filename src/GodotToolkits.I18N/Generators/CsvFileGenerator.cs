@@ -4,7 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
+using Utils;
 using ProjectInfo = Utils.ProjectInfo;
 
 namespace GodotToolkits.I18N.Generators;
@@ -13,13 +16,39 @@ namespace GodotToolkits.I18N.Generators;
 public sealed class CsvFileGenerator : IIncrementalGenerator
 {
 	private readonly string _namespace = $"{ProjectInfo.Title}Extension";
+	private bool _generateCsvContentClass = false;
 
 	public void Initialize(IncrementalGeneratorInitializationContext context)
 	{
 		var files = context.AdditionalTextsProvider.Where(file =>
 			file.Path.EndsWith(".csv")
 		);
+		var config = context.AnalyzerConfigOptionsProvider;
+		context.RegisterImplementationSourceOutput(config, ConfigOptions);
 		context.RegisterSourceOutput(files, GenerateCode);
+	}
+
+	private void ConfigOptions(
+		SourceProductionContext context,
+		AnalyzerConfigOptionsProvider options
+	)
+	{
+		if (
+			!options.GlobalOptions.TryGetValue(
+				"build_property.projectdir",
+				out var projectDir
+			)
+		)
+			return;
+
+		var configPath = Path.Combine(projectDir, ".godotoolkits");
+		using StreamReader reader = new(configPath);
+		var text = reader.ReadToEnd();
+		var config = text.Split('\n')
+			.FirstOrDefault(l => l.StartsWith("GenerateContentClass"))
+			?.Split('=')[1];
+		if (bool.TryParse(config, out var generateCsvContentClass))
+			_generateCsvContentClass = generateCsvContentClass;
 	}
 
 	private void GenerateCode(
@@ -43,10 +72,11 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 			$"{fileName}.Index.Generated.cs",
 			BuildIndexClass(fileName, indexes, _namespace)
 		);
-		context.AddSource(
-			$"{fileName}.Generated.cs",
-			BuildContentClass(fileName, GetCsvData(lines), _namespace)
-		);
+		if (_generateCsvContentClass)
+			context.AddSource(
+				$"{fileName}.Generated.cs",
+				BuildContentClass(fileName, GetCsvData(lines), _namespace)
+			);
 	}
 
 	public static string BuildContentClass(
