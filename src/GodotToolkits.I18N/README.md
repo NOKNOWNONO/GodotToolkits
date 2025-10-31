@@ -22,13 +22,13 @@ namespace GodotToolkits.I18NExtension;
 #if GODOT
 using global::Godot;
 [GlobalClass]
-public static class FooIndex : RefCounted
+public partial class FooIndex : RefCounted
 #else
-public static class FooIndex
+public partial class FooIndex
 #endif
 {
- public const string hello = "hello";
- public const string world = "world";
+ public static readonly string hello = "hello";
+ public static readonly string world = "world";
 }
 ```
 
