@@ -106,9 +106,9 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		code.AppendLine("#if GODOT");
 		code.AppendLine("using global::Godot;");
 		code.AppendLine("[GlobalClass]");
-		code.AppendLine($"public static class {className}Index : RefCounted");
+		code.AppendLine($"public partial class {className}Index : RefCounted");
 		code.AppendLine("#else");
-		code.AppendLine($"public static class {className}Index");
+		code.AppendLine($"public partial class {className}Index");
 		code.AppendLine("#endif");
 		code.AppendLine("{");
 		foreach (
