@@ -1,5 +1,3 @@
-using System;
-
 namespace GodotToolkits.MVVM.Sample;
 
 [View]

@@ -1,13 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
-using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Utils;
 using ProjectInfo = Utils.ProjectInfo;
 
 namespace GodotToolkits.I18N.Generators;

@@ -1,4 +1,3 @@
-using System;
 using Microsoft.CodeAnalysis;
 using Utils;
 using ProjectInfo = Utils.ProjectInfo;
