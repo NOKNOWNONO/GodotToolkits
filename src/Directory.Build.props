@@ -33,4 +33,11 @@
 			Visible="false"
 		/>
 	</ItemGroup>
+	<ItemGroup></ItemGroup>
+	<!-- 确保在编译之后处理打包 -->
+	<Target Name="IncludeAnalyzersInPackage" AfterTargets="Build">
+		<ItemGroup>
+			<Content Include="$(OutputPath)\*.dll" Pack="true" PackagePath="analyzers/dotnet/cs" />
+		</ItemGroup>
+	</Target>
 </Project>
