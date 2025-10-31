@@ -32,6 +32,12 @@ jobs:
       - name: Build mvvm project
         run: dotnet build src/GodotToolkits.MVVM/GodotToolkits.MVVM.csproj --configuration Release --no-restore
 
+      - name: Pack i18n project
+        run: dotnet pack src/GodotToolkits.I18N/GodotToolkits.I18N.csproj --configuration Release --no-build --output ./packages
+
+      - name: Pack mvvm project
+        run: dotnet pack src/GodotToolkits.MVVM/GodotToolkits.MVVM.csproj --configuration Release --no-build --output ./packages
+
       - name: Release project
         uses: softprops/action-gh-release@v2
         with:
