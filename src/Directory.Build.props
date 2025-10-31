@@ -4,9 +4,6 @@
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
 		<IsPackable>true</IsPackable>
-		<GeneratePackageOnBuild Condition="'$(DesignTimeBuild)' != 'true'"
-			>true</GeneratePackageOnBuild
-		>
 		<IncludeBuildOutput>false</IncludeBuildOutput>
 		<PackageId>$(RootNamespace)</PackageId>
 		<Title>$(RootNamespace)</Title>
@@ -36,33 +33,4 @@
 			Visible="false"
 		/>
 	</ItemGroup>
-	<ItemGroup>
-		<!-- 明确告诉MSBuild这个文件是在编译过程中生成的 -->
-		<Content
-			Include="$(OutputPath)\$(AssemblyName).dll"
-			Pack="true"
-			PackagePath="analyzers/dotnet/cs"
-		>
-			<Visible>false</Visible>
-			<!-- 关键：指定这个文件是构建输出 -->
-			<Link>analyzers/dotnet/cs/$(AssemblyName).dll</Link>
-		</Content>
-	</ItemGroup>
-	<!-- 确保在编译之后处理打包 -->
-	<Target Name="IncludeAnalyzersInPackage" AfterTargets="Build">
-		<ItemGroup>
-			<Content
-				Include="$(OutputPath)\$(AssemblyName).dll"
-				Pack="true"
-				PackagePath="analyzers/dotnet/cs"
-			/>
-			<!-- 如果有依赖，也在这里包含 -->
-			<Content
-				Include="$(OutputPath)\*.dll"
-				Pack="true"
-				PackagePath="analyzers/dotnet/cs"
-				Condition="'%(Filename)' != '$(AssemblyName)'"
-			/>
-		</ItemGroup>
-	</Target>
 </Project>
