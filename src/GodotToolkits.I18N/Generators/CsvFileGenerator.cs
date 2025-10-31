@@ -115,7 +115,9 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 			var index in indexes.Where(index => !string.IsNullOrEmpty(index))
 		)
 		{
-			code.AppendLine($"\tpublic const string {index} = \"{index}\";");
+			code.AppendLine(
+				$"\tpublic static readonly string {index} = \"{index}\";"
+			);
 		}
 
 		code.AppendLine("}");
