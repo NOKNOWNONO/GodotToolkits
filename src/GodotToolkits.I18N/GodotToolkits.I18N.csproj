@@ -6,7 +6,7 @@
 		<IncludeBuiltProjectOutput>false</IncludeBuiltProjectOutput>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<!-- Nuget Package -->
-		<Version>1.0.7-dev2</Version>
+		<Version>1.0.7-dev3</Version>
 		<PackageTags>Godot;dotnet;csharp;.NET;roslyn;</PackageTags>
 		<Description>一个用与给Csv文件生成翻译资源的工具.</Description>
 	</PropertyGroup>

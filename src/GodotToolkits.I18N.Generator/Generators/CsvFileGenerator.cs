@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -37,14 +38,17 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 			)
 		)
 			return;
-
-		var configPath = Path.Combine(projectDir, ".godotoolkits");
-		using StreamReader reader = new(configPath);
-		var text = reader.ReadToEnd();
-		if (ConfigManager.TryParse(text, out var config))
+		try
 		{
-			_generateCsvContentClass = config!.GenerateContentClass;
+			var configPath = Path.Combine(projectDir, ".godotoolkits");
+			using StreamReader reader = new(configPath);
+			var text = reader.ReadToEnd();
+			if (ConfigManager.TryParse(text, out var config))
+			{
+				_generateCsvContentClass = config!.GenerateContentClass;
+			}
 		}
+		catch (Exception) { }
 	}
 
 	private void GenerateCode(
