@@ -3,10 +3,11 @@ using GodotToolkits.MVVM.Generator.Generators.Modules;
 using GodotToolkits.Utils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Utils;
 using ProjectInfo = Utils.ProjectInfo;
 
 namespace GodotToolkits.MVVM.Generator.Generators;
+
+using System;
 
 [Generator(LanguageNames.CSharp)]
 public sealed class ViewGenerator : IIncrementalGenerator
@@ -14,7 +15,7 @@ public sealed class ViewGenerator : IIncrementalGenerator
 	public static readonly string GeneratedCode =
 		AttributeStringBuild.GeneratedCode(
 			$"{ProjectInfo.Title}.Generators.ViewGenerator",
-			ProjectInfo.Version
+			ProjectInfo.MvvmVersion
 		);
 
 	public void Initialize(IncrementalGeneratorInitializationContext context)
@@ -38,7 +39,13 @@ public sealed class ViewGenerator : IIncrementalGenerator
 		var namespaceName = node.GetNamespace();
 
 		var classBuilder = new StringBuilder();
-		classBuilder.AppendLine(AttributeStringBuild.GeneratedTitle);
+		classBuilder.AppendLine(
+			AttributeStringBuild.GeneratedTitle(
+				nameof(ViewGenerator),
+				ProjectInfo.MvvmVersion,
+				DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+			)
+		);
 		if (namespaceName is not null)
 			classBuilder.AppendLine($"namespace {namespaceName};");
 		classBuilder.AppendLine();

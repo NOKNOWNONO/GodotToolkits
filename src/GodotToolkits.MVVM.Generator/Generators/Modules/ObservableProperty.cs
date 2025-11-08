@@ -1,4 +1,5 @@
-﻿using GodotToolkits.Utils;
+﻿using System;
+using GodotToolkits.Utils;
 using Microsoft.CodeAnalysis;
 using ProjectInfo = Utils.ProjectInfo;
 
@@ -9,11 +10,11 @@ public sealed class ObservableProperty : IIncrementalGenerator
 {
 	public const string AttributeName = "ObservableProperty";
 	public const string ClassName = "ObservablePropertyAttribute";
-	public static readonly string Namespace = ProjectInfo.Title;
+	public const string Namespace = ProjectInfo.Title + ".MVVM";
 
 	public static string BuildCode()
 	{
-		return $@"{AttributeStringBuild.GeneratedTitle}
+		return $@"{AttributeStringBuild.GeneratedTitle(nameof(ObservableProperty), ProjectInfo.MvvmVersion,DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))}
 
 namespace {Namespace};
 using global::System;
@@ -22,7 +23,7 @@ using global::System;
 {AttributeStringBuild.GeneratedCode
 (
 	$"{ProjectInfo.Title}.Generators.Modules.ObservableProperty"
-	, ProjectInfo.Version
+	, ProjectInfo.MvvmVersion
 )}
 public class {ClassName} : Attribute
 {{

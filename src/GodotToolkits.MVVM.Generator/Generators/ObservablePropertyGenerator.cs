@@ -1,11 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Text;
 using GodotToolkits.MVVM.Generator.Generators.Modules;
 using GodotToolkits.Utils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Utils;
 using ProjectInfo = Utils.ProjectInfo;
 
 namespace GodotToolkits.MVVM.Generator.Generators;
@@ -16,7 +16,7 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 	public static readonly string GeneratedCode =
 		AttributeStringBuild.GeneratedCode(
 			$"{ProjectInfo.Title}.Generators.ObservablePropertyGenerator",
-			ProjectInfo.Version
+			ProjectInfo.MvvmVersion
 		);
 
 	public const string FullDictionary =
@@ -58,7 +58,13 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 			.Where(n => n.HasAttribute(ObservableProperty.AttributeName));
 
 		var classBuilder = new StringBuilder();
-		classBuilder.AppendLine(AttributeStringBuild.GeneratedTitle);
+		classBuilder.AppendLine(
+			AttributeStringBuild.GeneratedTitle(
+				nameof(ObservablePropertyGenerator),
+				ProjectInfo.MvvmVersion,
+				DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+			)
+		);
 		if (namespaceName is not null)
 			classBuilder.AppendLine($"namespace {namespaceName};");
 		classBuilder.AppendLine("using global::System.Linq;");

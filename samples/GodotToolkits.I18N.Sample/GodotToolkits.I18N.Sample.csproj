@@ -8,6 +8,6 @@
 		<AdditionalFiles Include="**\*.csv" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\GodotToolkits.I18N\GodotToolkits.I18N.csproj" />
+		<PackageReference Include="GodotToolkits.I18N" Version="*" />
 	</ItemGroup>
 </Project>

@@ -12,7 +12,7 @@ namespace GodotToolkits.I18N.Generator.Generators;
 [Generator(LanguageNames.CSharp)]
 public sealed class CsvFileGenerator : IIncrementalGenerator
 {
-	private readonly string _namespace = $"{ProjectInfo.Title}Extension";
+	private readonly string _namespace = $"{ProjectInfo.Title}.I18NExtension";
 	private bool _generateCsvContentClass = false;
 
 	public void Initialize(IncrementalGeneratorInitializationContext context)

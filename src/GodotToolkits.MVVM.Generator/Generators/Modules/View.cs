@@ -1,3 +1,4 @@
+using System;
 using GodotToolkits.Utils;
 using Microsoft.CodeAnalysis;
 using ProjectInfo = Utils.ProjectInfo;
@@ -9,11 +10,11 @@ public sealed class View : IIncrementalGenerator
 {
 	public const string AttributeName = "View";
 	public const string ClassName = "ViewAttribute";
-	public static readonly string Namespace = ProjectInfo.Title;
+	public const string Namespace = ProjectInfo.Title + ".MVVM";
 
 	public static string BuildCode()
 	{
-		return $@"{AttributeStringBuild.GeneratedTitle}
+		return $@"{AttributeStringBuild.GeneratedTitle(nameof(View), ProjectInfo.MvvmVersion,DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))}
 
 namespace {Namespace};
 using global::System;
@@ -22,7 +23,7 @@ using global::System;
 {AttributeStringBuild.GeneratedCode
 (
 	$"{ProjectInfo.Title}.Generators.Modules.View"
-	, ProjectInfo.Version
+	, ProjectInfo.MvvmVersion
 )}
 
 public sealed class {ClassName} : Attribute

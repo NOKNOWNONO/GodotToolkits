@@ -5,6 +5,6 @@
 		<RootNamespace>GodotToolkits.MVVM.Sample</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\GodotToolkits.MVVM\GodotToolkits.MVVM.csproj" />
+		<PackageReference Include="GodotToolkits.MVVM" Version="*" />
 	</ItemGroup>
 </Project>
