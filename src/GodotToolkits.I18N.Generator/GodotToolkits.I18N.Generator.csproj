@@ -24,4 +24,7 @@
 			<Link>SyntaxNodeExtensions.cs</Link>
 		</Compile>
 	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Config\Config.csproj" />
+	</ItemGroup>
 </Project>

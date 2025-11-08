@@ -25,9 +25,9 @@
 			ReferenceOutputAssembly="false"
 		/>
 	</ItemGroup>
-	<ItemGroup Label="Package ">
+	<ItemGroup Label="Package">
 		<None
-			Include="$(OutputPath)../$(AssemblyName).Generator/$(AssemblyName).Generator.dll"
+			Include="../../output/bin/$(AssemblyName).Generator/$(Configuration)/$(TargetFramework)/$(AssemblyName).Generator.dll"
 			PackagePath="analyzers/dotnet/cs"
 			Pack="true"
 			Visible="false"

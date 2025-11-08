@@ -2,7 +2,7 @@ using Microsoft.CodeAnalysis;
 using Utils;
 using ProjectInfo = Utils.ProjectInfo;
 
-namespace GodotToolkits.MVVM.Generators.Modules;
+namespace GodotToolkits.MVVM.Generator.Generators.Modules;
 
 [Generator(LanguageNames.CSharp)]
 public sealed class ObservableDictionary : IIncrementalGenerator

@@ -2,7 +2,7 @@
 	<Import Project="$(MSBuildThisFileDirectory)/../Directory.Build.props" />
 	<PropertyGroup>
 		<Nullable>enable</Nullable>
-		<LangVersion>latest</LangVersion>
+		<LangVersion>14</LangVersion>
 		<PackageId>$(RootNamespace)</PackageId>
 		<Title>$(RootNamespace)</Title>
 		<Authors>NOKNOWNONO</Authors>
@@ -16,23 +16,12 @@
 		<Copyright>Copyright NOKNOWNONO. All rights reserved</Copyright>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference
-			Include="$(MSBuildThisFileDirectory)/../Config/Config.csproj"
-			PrivateAssets="All"
-		/>
-	</ItemGroup>
-	<ItemGroup>
 		<None Include="$(MSBuildProjectDirectory)/README.md" Pack="true" PackagePath="/" />
 		<None
 			Include="$(MSBuildProjectDirectory)/../../icon.png"
 			Pack="true"
 			PackagePath="/"
 			Visible="false"
-		/>
-		<None
-			Include="$(MSBuildThisFileDirectory)/../output/Config/bin/$(Configuration)/$(TargetFramework)/Config.dll"
-			Pack="true"
-			PackagePath="analyzers/dotnet/cs"
 		/>
 	</ItemGroup>
 </Project>

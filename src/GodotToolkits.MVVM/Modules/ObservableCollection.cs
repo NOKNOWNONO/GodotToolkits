@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace GodotToolkits.MVVM.Compoment;
+namespace GodotToolkits.MVVM.Modules;
 
 public sealed class ObservableCollection<T>
 	: ICollection<T>,

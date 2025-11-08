@@ -15,11 +15,12 @@
 		<ProjectReference
 			Include="..\GodotToolkits.I18N.Generator\GodotToolkits.I18N.Generator.csproj"
 			ReferenceOutputAssembly="false"
+			OutputItemType="Analyzer"
 		/>
 	</ItemGroup>
-	<ItemGroup Label="Package ">
+	<ItemGroup Label="Package">
 		<None
-			Include="$(OutputPath)../../$(AssemblyName).Generator/$(TargetFramework)/$(AssemblyName).Generator.dll"
+			Include="../../output/bin/$(AssemblyName).Generator/$(Configuration)/$(TargetFramework)/$(AssemblyName).Generator.dll"
 			PackagePath="analyzers/dotnet/cs"
 			Pack="true"
 			Visible="false"

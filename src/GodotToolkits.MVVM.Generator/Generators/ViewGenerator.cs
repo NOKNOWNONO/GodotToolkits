@@ -1,11 +1,11 @@
 using System.Text;
-using GodotToolkits.MVVM.Generators.Modules;
+using GodotToolkits.MVVM.Generator.Generators.Modules;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Utils;
 using ProjectInfo = Utils.ProjectInfo;
 
-namespace GodotToolkits.MVVM.Generators;
+namespace GodotToolkits.MVVM.Generator.Generators;
 
 [Generator(LanguageNames.CSharp)]
 public sealed class ViewGenerator : IIncrementalGenerator

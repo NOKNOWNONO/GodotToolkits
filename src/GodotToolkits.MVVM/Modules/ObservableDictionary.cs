@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace GodotToolkits.MVVM.Compoment;
+namespace GodotToolkits.MVVM.Modules;
 
 public class ObservableDictionary<TKey, TValue>
 	: IDictionary<TKey, TValue>,
