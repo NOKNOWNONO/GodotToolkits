@@ -6,7 +6,7 @@
 
 在项目文件夹下添加`.godotoolkits`文件
 
-`GenerateContentClass=false` 是否生成内容类,默认为`true`
+`GenerateContentClass=false` 是否生成内容类,默认为`false`
 
 ## 生成示例
 
