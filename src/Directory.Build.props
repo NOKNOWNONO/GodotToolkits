@@ -18,6 +18,12 @@
 		<Copyright>Copyright NOKNOWNONO. All rights reserved</Copyright>
 	</PropertyGroup>
 	<ItemGroup>
+		<ProjectReference
+			Include="$(MSBuildThisFileDirectory)/../Config/Config.csproj"
+			PrivateAssets="All"
+		/>
+	</ItemGroup>
+	<ItemGroup>
 		<Compile Include="$(MSBuildThisFileDirectory)/Utils/*.cs">
 			<Link>ProjectInfo.cs</Link>
 			<Link>AttributeStringBuild.cs</Link>
