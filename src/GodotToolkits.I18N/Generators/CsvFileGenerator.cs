@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using GodotToolkits.Config;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using ProjectInfo = Utils.ProjectInfo;
@@ -40,11 +41,10 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		var configPath = Path.Combine(projectDir, ".godotoolkits");
 		using StreamReader reader = new(configPath);
 		var text = reader.ReadToEnd();
-		var config = text.Split('\n')
-			.FirstOrDefault(l => l.StartsWith("GenerateContentClass"))
-			?.Split('=')[1];
-		if (bool.TryParse(config, out var generateCsvContentClass))
-			_generateCsvContentClass = generateCsvContentClass;
+		if (ConfigManager.TryParse(text, out var config))
+		{
+			_generateCsvContentClass = config.GenerateContentClass;
+		}
 	}
 
 	private void GenerateCode(

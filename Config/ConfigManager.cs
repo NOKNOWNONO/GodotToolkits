@@ -10,7 +10,7 @@ public class ConfigManager
 
 	private ConfigManager() { }
 
-	public static bool TryParser(string json, out ConfigManager? manager)
+	public static bool TryParse(string json, out ConfigManager? manager)
 	{
 		try
 		{
