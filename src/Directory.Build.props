@@ -3,8 +3,6 @@
 	<PropertyGroup>
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
-		<IsPackable>true</IsPackable>
-		<IncludeBuildOutput>false</IncludeBuildOutput>
 		<PackageId>$(RootNamespace)</PackageId>
 		<Title>$(RootNamespace)</Title>
 		<Authors>NOKNOWNONO</Authors>
@@ -24,13 +22,6 @@
 		/>
 	</ItemGroup>
 	<ItemGroup>
-		<Compile Include="$(MSBuildThisFileDirectory)/Utils/*.cs">
-			<Link>ProjectInfo.cs</Link>
-			<Link>AttributeStringBuild.cs</Link>
-			<Link>SyntaxNodeExtensions.cs</Link>
-		</Compile>
-	</ItemGroup>
-	<ItemGroup>
 		<None Include="$(MSBuildProjectDirectory)/README.md" Pack="true" PackagePath="/" />
 		<None
 			Include="$(MSBuildProjectDirectory)/../../icon.png"
@@ -38,10 +29,10 @@
 			PackagePath="/"
 			Visible="false"
 		/>
+		<None
+			Include="$(MSBuildThisFileDirectory)/../output/Config/bin/$(Configuration)/$(TargetFramework)/Config.dll"
+			Pack="true"
+			PackagePath="analyzers/dotnet/cs"
+		/>
 	</ItemGroup>
-	<Target Name="IncludeAnalyzersInPackage" AfterTargets="Build">
-		<ItemGroup>
-			<Content Include="$(OutputPath)\*.dll" Pack="true" PackagePath="analyzers/dotnet/cs" />
-		</ItemGroup>
-	</Target>
 </Project>

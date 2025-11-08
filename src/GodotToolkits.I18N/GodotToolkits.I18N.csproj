@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
+		<IsPackable>true</IsPackable>
 		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
 		<IncludeBuiltProjectOutputGroup>false</IncludeBuiltProjectOutputGroup>
 		<IsRoslynComponent>true</IsRoslynComponent>
@@ -11,11 +12,17 @@
 		<Description>一个用与给Csv文件生成翻译资源的工具.</Description>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.3.0" />
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.3.0" />
+		<ProjectReference
+			Include="..\GodotToolkits.I18N.Generator\GodotToolkits.I18N.Generator.csproj"
+			ReferenceOutputAssembly="false"
+		/>
+	</ItemGroup>
+	<ItemGroup Label="Package ">
+		<None
+			Include="$(OutputPath)../../$(AssemblyName).Generator/$(TargetFramework)/$(AssemblyName).Generator.dll"
+			PackagePath="analyzers/dotnet/cs"
+			Pack="true"
+			Visible="false"
+		/>
 	</ItemGroup>
 </Project>

@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using ProjectInfo = Utils.ProjectInfo;
 
-namespace GodotToolkits.I18N.Generators;
+namespace GodotToolkits.I18N.Generator.Generators;
 
 [Generator(LanguageNames.CSharp)]
 public sealed class CsvFileGenerator : IIncrementalGenerator
@@ -43,7 +43,7 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		var text = reader.ReadToEnd();
 		if (ConfigManager.TryParse(text, out var config))
 		{
-			_generateCsvContentClass = config.GenerateContentClass;
+			_generateCsvContentClass = config!.GenerateContentClass;
 		}
 	}
 

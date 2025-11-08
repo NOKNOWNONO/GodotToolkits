@@ -11,7 +11,4 @@
 			ReferenceOutputAssembly="false"
 		/>
 	</ItemGroup>
-	<ItemGroup>
-		<None Remove="DDD.UbiquitousLanguageRegistry.txt" />
-	</ItemGroup>
 </Project>

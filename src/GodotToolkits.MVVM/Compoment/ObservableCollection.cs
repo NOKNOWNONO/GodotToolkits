@@ -1,12 +1,10 @@
-//GeneratedTitle
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
-using global::System;
-using global::System.Collections;
-using global::System.Collections.Generic;
+namespace GodotToolkits.MVVM.Compoment;
 
-namespace GodotToolkits.MVVM.Templates;
-
-public sealed class TObservableCollection<T>
+public sealed class ObservableCollection<T>
 	: ICollection<T>,
 		IEnumerable<T>,
 		IEnumerable,
@@ -18,26 +16,22 @@ public sealed class TObservableCollection<T>
 
 	public Action? CollectionChanged;
 
-	//GeneratedCode
 	public IEnumerator<T> GetEnumerator()
 	{
 		return _list.GetEnumerator();
 	}
 
-	//GeneratedCode
 	IEnumerator IEnumerable.GetEnumerator()
 	{
 		return _list.GetEnumerator();
 	}
 
-	//GeneratedCode
 	public void Add(T item)
 	{
 		_list.Add(item);
 		CollectionChanged?.Invoke();
 	}
 
-	//GeneratedCode
 	public int Add(object? value)
 	{
 		var r = ((IList)_list).Add(value);
@@ -45,40 +39,34 @@ public sealed class TObservableCollection<T>
 		return r;
 	}
 
-	//GeneratedCode
 	void IList.Clear()
 	{
 		_list.Clear();
 		CollectionChanged?.Invoke();
 	}
 
-	//GeneratedCode
 	public bool Contains(object? value)
 	{
 		return ((IList)_list).Contains(value);
 	}
 
-	//GeneratedCode
 	public int IndexOf(object value)
 	{
 		return ((IList)_list).IndexOf(value);
 	}
 
-	//GeneratedCode
 	public void Insert(int index, object value)
 	{
 		((IList)_list).Insert(index, value);
 		CollectionChanged?.Invoke();
 	}
 
-	//GeneratedCode
 	public void Remove(object value)
 	{
 		((IList)_list).Remove(value);
 		CollectionChanged?.Invoke();
 	}
 
-	//GeneratedCode
 	void IList.RemoveAt(int index)
 	{
 		_list.RemoveAt(index);
@@ -87,26 +75,22 @@ public sealed class TObservableCollection<T>
 
 	public bool IsFixedSize => ((IList)_list).IsFixedSize;
 
-	//GeneratedCode
 	void ICollection<T>.Clear()
 	{
 		_list.Clear();
 		CollectionChanged?.Invoke();
 	}
 
-	//GeneratedCode
 	public bool Contains(T item)
 	{
 		return _list.Contains(item);
 	}
 
-	//GeneratedCode
 	public void CopyTo(T[] array, int arrayIndex)
 	{
 		_list.CopyTo(array, arrayIndex);
 	}
 
-	//GeneratedCode
 	public bool Remove(T item)
 	{
 		var r = _list.Remove(item);
@@ -114,7 +98,6 @@ public sealed class TObservableCollection<T>
 		return r;
 	}
 
-	//GeneratedCode
 	public void CopyTo(Array array, int index)
 	{
 		((ICollection)_list).CopyTo(array, index);
@@ -138,20 +121,17 @@ public sealed class TObservableCollection<T>
 		}
 	}
 
-	//GeneratedCode
 	public int IndexOf(T item)
 	{
 		return _list.IndexOf(item);
 	}
 
-	//GeneratedCode
 	public void Insert(int index, T item)
 	{
 		_list.Insert(index, item);
 		CollectionChanged?.Invoke();
 	}
 
-	//GeneratedCode
 	void IList<T>.RemoveAt(int index)
 	{
 		_list.RemoveAt(index);
@@ -168,7 +148,6 @@ public sealed class TObservableCollection<T>
 		}
 	}
 
-	//GeneratedCode
 	public void AddRange(IEnumerable<T> collection)
 	{
 		foreach (var item in collection)
