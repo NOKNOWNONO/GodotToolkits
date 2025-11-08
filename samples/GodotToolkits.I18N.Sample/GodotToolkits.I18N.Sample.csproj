@@ -5,9 +5,9 @@
 		<RootNamespace>GodotToolkits.I18N.Sample</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\GodotToolkits.I18N\GodotToolkits.I18N.csproj" />
+		<AdditionalFiles Include="**\*.csv" />
 	</ItemGroup>
 	<ItemGroup>
-		<AdditionalFiles Include="**\*.csv" />
+		<ProjectReference Include="..\..\src\GodotToolkits.I18N\GodotToolkits.I18N.csproj" />
 	</ItemGroup>
 </Project>

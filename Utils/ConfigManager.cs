@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text.Json;
 
-namespace GodotToolkits.Config;
+namespace GodotToolkits.Utils;
 
 public class ConfigManager
 {

@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace Utils;
+namespace GodotToolkits.Utils;
 
 public static class SyntaxNodeExtensions
 {

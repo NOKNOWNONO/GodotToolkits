@@ -1,4 +1,4 @@
-﻿namespace Utils;
+﻿namespace GodotToolkits.Utils;
 
 public static class AttributeStringBuild
 {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using GodotToolkits.Config;
+using GodotToolkits.Utils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using ProjectInfo = Utils.ProjectInfo;

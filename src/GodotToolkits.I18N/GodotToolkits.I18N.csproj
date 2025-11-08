@@ -2,9 +2,6 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<IsPackable>true</IsPackable>
-		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-		<IncludeBuiltProjectOutputGroup>false</IncludeBuiltProjectOutputGroup>
-		<IsRoslynComponent>true</IsRoslynComponent>
 		<RootNamespace>GodotToolkits.I18N</RootNamespace>
 		<!-- Nuget Package -->
 		<Version>1.0.7-dev2</Version>
@@ -14,13 +11,19 @@
 	<ItemGroup>
 		<ProjectReference
 			Include="..\GodotToolkits.I18N.Generator\GodotToolkits.I18N.Generator.csproj"
-			ReferenceOutputAssembly="false"
 			OutputItemType="Analyzer"
+			PrivateAssets="All"
 		/>
 	</ItemGroup>
 	<ItemGroup Label="Package">
 		<None
 			Include="../../output/bin/$(AssemblyName).Generator/$(Configuration)/$(TargetFramework)/$(AssemblyName).Generator.dll"
+			PackagePath="analyzers/dotnet/cs"
+			Pack="true"
+			Visible="false"
+		/>
+		<None
+			Include="../../output/bin/Utils/$(Configuration)/$(TargetFramework)/Utils.dll"
 			PackagePath="analyzers/dotnet/cs"
 			Pack="true"
 			Visible="false"

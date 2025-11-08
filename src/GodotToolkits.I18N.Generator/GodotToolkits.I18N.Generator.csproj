@@ -20,11 +20,13 @@
 	<ItemGroup>
 		<Compile Include="$(MSBuildThisFileDirectory)../Utils/*.cs">
 			<Link>ProjectInfo.cs</Link>
-			<Link>AttributeStringBuild.cs</Link>
-			<Link>SyntaxNodeExtensions.cs</Link>
 		</Compile>
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\Config\Config.csproj" />
+		<ProjectReference
+			Include="..\..\Utils\Utils.csproj"
+			IncludeAssets="All"
+			PrivateAssets="All"
+		/>
 	</ItemGroup>
 </Project>
