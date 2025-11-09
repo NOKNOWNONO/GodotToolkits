@@ -23,6 +23,9 @@
 		</Compile>
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\Utils\Utils.csproj" IncludeAssets="All" />
+		<ProjectReference
+			Include="..\GodotToolkits.Utils\GodotToolkits.Utils.csproj"
+			IncludeAssets="All"
+		/>
 	</ItemGroup>
 </Project>

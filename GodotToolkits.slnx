@@ -17,7 +17,7 @@
 		Type="Classic C#"
 	/>
 	<Project Path="src\GodotToolkits.MVVM\GodotToolkits.MVVM.csproj" Type="Classic C#" />
-	<Project Path="src\Utils\Utils.csproj" Type="Classic C#" />
+	<Project Path="src\GodotToolkits.Utils\GodotToolkits.Utils.csproj" Type="Classic C#" />
 	<Project
 		Path="tests\GodotToolkits.I18N.Tests\GodotToolkits.I18N.Tests.csproj"
 		Type="Classic C#"
