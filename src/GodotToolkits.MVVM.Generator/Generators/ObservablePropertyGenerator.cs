@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
-using GodotToolkits.MVVM.Generator.Generators.Modules;
 using GodotToolkits.Utils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -36,7 +35,7 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 				c.ChildNodes()
 					.OfType<FieldDeclarationSyntax>()
 					.Any(static f =>
-						f.HasAttribute(ObservableProperty.AttributeName)
+						f.HasAttribute(Common.ObservablePropertyAttributeName)
 					)
 			)
 			.Combine(context.CompilationProvider);
@@ -55,7 +54,7 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 		var semanticModel = compilation.GetSemanticModel(node.SyntaxTree);
 		var fields = node.ChildNodes()
 			.OfType<FieldDeclarationSyntax>()
-			.Where(n => n.HasAttribute(ObservableProperty.AttributeName));
+			.Where(n => n.HasAttribute(Common.ObservablePropertyAttributeName));
 
 		var classBuilder = new StringBuilder();
 		classBuilder.AppendLine(

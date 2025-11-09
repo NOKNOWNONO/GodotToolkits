@@ -1,5 +1,4 @@
 using System.Text;
-using GodotToolkits.MVVM.Generator.Generators.Modules;
 using GodotToolkits.Utils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -25,7 +24,7 @@ public sealed class ViewGenerator : IIncrementalGenerator
 				predicate: static (s, _) => s is ClassDeclarationSyntax,
 				transform: static (ctx, _) => (ClassDeclarationSyntax)ctx.Node
 			)
-			.Where(c => c.HasAttribute(View.AttributeName));
+			.Where(c => c.HasAttribute(Common.ViewAttributeName));
 
 		context.RegisterSourceOutput(classNodes, GenerateCode);
 	}
