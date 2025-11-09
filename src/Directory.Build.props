@@ -24,7 +24,4 @@
 			Visible="false"
 		/>
 	</ItemGroup>
-	<PropertyGroup>
-		<MVVM_Version>0.2.5</MVVM_Version>
-	</PropertyGroup>
 </Project>

@@ -16,6 +16,13 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 	private readonly string _namespace = $"{ProjectInfo.Title}.I18NExtension";
 	private bool _generateCsvContentClass = false;
 
+	private readonly string _generatedCodeHeader =
+		AttributeStringBuild.GeneratedTitle(
+			nameof(CsvFileGenerator),
+			ProjectInfo.I18NVersion,
+			DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+		);
+
 	public void Initialize(IncrementalGeneratorInitializationContext context)
 	{
 		var files = context.AdditionalTextsProvider.Where(file =>
@@ -72,20 +79,21 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 			$"{fileName}.Index.Generated.cs",
 			BuildIndexClass(fileName, indexes, _namespace)
 		);
-		if (_generateCsvContentClass)
-			context.AddSource(
-				$"{fileName}.Generated.cs",
-				BuildContentClass(fileName, GetCsvData(lines), _namespace)
-			);
+		context.AddSource(
+			$"{fileName}.Generated.cs",
+			BuildContentClass(fileName, GetCsvData(lines), _namespace)
+		);
 	}
 
-	public static string BuildContentClass(
+	public string BuildContentClass(
 		string className,
 		List<CsvContent> data,
 		string? @namespace = null
 	)
 	{
 		var code = new StringBuilder();
+		code.AppendLine(_generatedCodeHeader);
+		code.AppendLine($"#if {_generateCsvContentClass}");
 		if (!string.IsNullOrEmpty(@namespace))
 			code.AppendLine($"namespace {@namespace};");
 		code.AppendLine("using global::System.Collections.Generic;");
@@ -120,16 +128,18 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		}
 
 		code.AppendLine("}");
+		code.AppendLine("#endif");
 		return code.ToString();
 	}
 
-	public static string BuildIndexClass(
+	public string BuildIndexClass(
 		string className,
 		List<string> indexes,
 		string? @namespace = null
 	)
 	{
 		var code = new StringBuilder();
+		code.AppendLine(_generatedCodeHeader);
 		if (!string.IsNullOrEmpty(@namespace))
 			code.AppendLine($"namespace {@namespace};");
 		code.AppendLine();
