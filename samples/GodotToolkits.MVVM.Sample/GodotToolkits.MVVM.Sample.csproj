@@ -5,6 +5,7 @@
 		<RootNamespace>GodotToolkits.MVVM.Sample</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="GodotToolkits.MVVM" Version="*" />
+	  <PackageReference Include="GodotToolkits.MVVM" Version="0.2.6-dev1" />
 	</ItemGroup>
+	
 </Project>

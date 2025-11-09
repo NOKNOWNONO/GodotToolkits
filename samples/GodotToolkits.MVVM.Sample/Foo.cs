@@ -1,4 +1,6 @@
-﻿namespace GodotToolkits.MVVM.Sample;
+﻿using GodotToolkits.MVVM.Modules;
+
+namespace GodotToolkits.MVVM.Sample;
 
 public partial class Foo
 {
