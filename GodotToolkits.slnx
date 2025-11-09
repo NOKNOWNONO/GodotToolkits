@@ -17,6 +17,7 @@
 		Type="Classic C#"
 	/>
 	<Project Path="src\GodotToolkits.MVVM\GodotToolkits.MVVM.csproj" Type="Classic C#" />
+	<Project Path="src\Utils\Utils.csproj" Type="Classic C#" />
 	<Project
 		Path="tests\GodotToolkits.I18N.Tests\GodotToolkits.I18N.Tests.csproj"
 		Type="Classic C#"
@@ -25,5 +26,4 @@
 		Path="tests\GodotToolkits.MVVM.Tests\GodotToolkits.MVVM.Tests.csproj"
 		Type="Classic C#"
 	/>
-	<Project Path="Utils\Utils.csproj" Type="Classic C#" />
 </Solution>

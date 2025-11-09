@@ -23,10 +23,6 @@
 		</Compile>
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference
-			Include="..\..\Utils\Utils.csproj"
-			IncludeAssets="All"
-			PrivateAssets="All"
-		/>
+		<ProjectReference Include="..\Utils\Utils.csproj" IncludeAssets="All" />
 	</ItemGroup>
 </Project>

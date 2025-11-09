@@ -14,7 +14,7 @@ namespace GodotToolkits.I18N.Generator.Generators;
 public sealed class CsvFileGenerator : IIncrementalGenerator
 {
 	private readonly string _namespace = $"{ProjectInfo.Title}.I18NExtension";
-	private bool _generateCsvContentClass = false;
+	private bool _generateCsvContentClass;
 
 	private readonly string _generatedCodeHeader =
 		AttributeStringBuild.GeneratedTitle(
@@ -55,7 +55,10 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 				_generateCsvContentClass = config!.GenerateContentClass;
 			}
 		}
-		catch (Exception) { }
+		catch (Exception)
+		{
+			_generateCsvContentClass = false;
+		}
 	}
 
 	private void GenerateCode(
@@ -85,7 +88,7 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		);
 	}
 
-	public string BuildContentClass(
+	private string BuildContentClass(
 		string className,
 		List<CsvContent> data,
 		string? @namespace = null
@@ -132,7 +135,7 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		return code.ToString();
 	}
 
-	public string BuildIndexClass(
+	private string BuildIndexClass(
 		string className,
 		List<string> indexes,
 		string? @namespace = null

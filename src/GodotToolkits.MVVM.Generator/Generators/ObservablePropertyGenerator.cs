@@ -71,7 +71,6 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 		classBuilder.AppendLine("{");
 		foreach (var field in fields)
 		{
-			var variable = field.Declaration.Variables.First();
 			var typeInfo = semanticModel.GetTypeInfo(field.Declaration.Type);
 			var typeSymbol = typeInfo.Type;
 			if (typeSymbol == null)
