@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace GodotToolkits.MVVM.Modules;
 
 public class ObservableDictionary<TKey, TValue>
 	: IDictionary<TKey, TValue>,
 		IDictionary
+	where TKey : notnull
+	where TValue : notnull
 {
 	private readonly Dictionary<TKey, TValue> _dictionary = [];
 	public Action? DictionaryChanged;
@@ -46,7 +49,7 @@ public class ObservableDictionary<TKey, TValue>
 		DictionaryChanged?.Invoke();
 	}
 
-	public void Add(object key, object value)
+	public void Add(object key, object? value)
 	{
 		((IDictionary)_dictionary).Add(key, value);
 	}
@@ -98,7 +101,7 @@ public class ObservableDictionary<TKey, TValue>
 
 	public bool IsReadOnly => false;
 
-	public object this[object key]
+	public object? this[object key]
 	{
 		get => ((IDictionary)_dictionary)[key];
 		set
@@ -128,7 +131,13 @@ public class ObservableDictionary<TKey, TValue>
 
 	public bool TryGetValue(TKey key, out TValue value)
 	{
-		return _dictionary.TryGetValue(key, out value);
+		if (_dictionary.TryGetValue(key, out var v))
+		{
+			value = v;
+			return true;
+		}
+		value = default!;
+		return false;
 	}
 
 	public TValue this[TKey key]

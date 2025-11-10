@@ -2,7 +2,7 @@
 	<Import Project="$(MSBuildThisFileDirectory)/../Directory.Build.props" />
 	<PropertyGroup>
 		<Nullable>enable</Nullable>
-		<LangVersion>14</LangVersion>
+		<LangVersion>latest</LangVersion>
 		<PackageId>$(RootNamespace)</PackageId>
 		<Title>$(RootNamespace)</Title>
 		<Authors>NOKNOWNONO</Authors>

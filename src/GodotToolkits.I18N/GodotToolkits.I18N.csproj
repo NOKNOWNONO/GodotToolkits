@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
+		<TargetFrameworks>netstandard2.0;.net9;</TargetFrameworks>
 		<IsPackable>true</IsPackable>
 		<RootNamespace>GodotToolkits.I18N</RootNamespace>
 		<IncludeBuiltProjectOutput>false</IncludeBuiltProjectOutput>
@@ -18,13 +18,13 @@
 	</ItemGroup>
 	<ItemGroup Label="Package">
 		<None
-			Include="../../output/bin/$(AssemblyName).Generator/$(Configuration)/$(TargetFramework)/$(AssemblyName).Generator.dll"
+			Include="../../output/bin/$(AssemblyName).Generator/$(Configuration)/netstandard2.0/$(AssemblyName).Generator.dll"
 			PackagePath="analyzers/dotnet/cs"
 			Pack="true"
 			Visible="false"
 		/>
 		<None
-			Include="../../output/bin/Utils/$(Configuration)/$(TargetFramework)/Utils.dll"
+			Include="../../output/bin/GodotToolkits.Utils/$(Configuration)/netstandard2.0/GodotToolkits.Utils.dll"
 			PackagePath="analyzers/dotnet/cs"
 			Pack="true"
 			Visible="false"

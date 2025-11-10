@@ -4,13 +4,8 @@ using System.Collections.Generic;
 
 namespace GodotToolkits.MVVM.Modules;
 
-public sealed class ObservableCollection<T>
-	: ICollection<T>,
-		IEnumerable<T>,
-		IEnumerable,
-		IList<T>,
-		ICollection,
-		IList
+public sealed class ObservableCollection<T> : IList<T>, IList
+	where T : notnull
 {
 	private readonly List<T> _list = [];
 
@@ -50,18 +45,18 @@ public sealed class ObservableCollection<T>
 		return ((IList)_list).Contains(value);
 	}
 
-	public int IndexOf(object value)
+	public int IndexOf(object? value)
 	{
 		return ((IList)_list).IndexOf(value);
 	}
 
-	public void Insert(int index, object value)
+	public void Insert(int index, object? value)
 	{
 		((IList)_list).Insert(index, value);
 		CollectionChanged?.Invoke();
 	}
 
-	public void Remove(object value)
+	public void Remove(object? value)
 	{
 		((IList)_list).Remove(value);
 		CollectionChanged?.Invoke();
@@ -111,7 +106,7 @@ public sealed class ObservableCollection<T>
 
 	public bool IsReadOnly => false;
 
-	object IList.this[int index]
+	object? IList.this[int index]
 	{
 		get => ((IList)_list)[index];
 		set
