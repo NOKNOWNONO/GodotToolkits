@@ -370,4 +370,3 @@ bin/
 obj/
 output/
 packages/
-./src/ProjectInfo.cs
