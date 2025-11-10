@@ -1,4 +1,6 @@
 <Solution>
+	<Project Path="InfoGenerator\InfoGenerator.csproj" Type="Classic C#" />
+	<Project Path="InfoTarget.csproj" Type="Classic C#" />
 	<Project
 		Path="samples\GodotToolkits.I18N.Sample\GodotToolkits.I18N.Sample.csproj"
 		Type="Classic C#"

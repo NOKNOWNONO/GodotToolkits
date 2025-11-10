@@ -42,7 +42,7 @@ public sealed class ViewGenerator : IIncrementalGenerator
 			AttributeStringBuild.GeneratedTitle(
 				nameof(ViewGenerator),
 				ProjectInfo.MvvmVersion,
-				DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+				DateTime.Now
 			)
 		);
 		if (namespaceName is not null)

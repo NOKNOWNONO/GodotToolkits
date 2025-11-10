@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Remove="InfoGenerator\**" />
+		<Compile Remove="src\**" />
+		<Compile Remove="tests\**" />
+		<Compile Remove="samples\**" />
+		<Compile Remove="packages\**" />
+		<Compile Remove="output\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Remove="InfoGenerator\**" />
+		<EmbeddedResource Remove="src\**" />
+		<EmbeddedResource Remove="tests\**" />
+		<EmbeddedResource Remove="samples\**" />
+		<EmbeddedResource Remove="packages\**" />
+		<EmbeddedResource Remove="output\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Remove="InfoGenerator\**" />
+		<None Remove="src\**" />
+		<None Remove="tests\**" />
+		<None Remove="samples\**" />
+		<None Remove="packages\**" />
+		<None Remove="output\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference
+			Include="InfoGenerator\InfoGenerator.csproj"
+			OutputItemType="Analyzer"
+			ReferenceOutputAssembly="false"
+		/>
+	</ItemGroup>
+</Project>

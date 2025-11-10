@@ -20,7 +20,7 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		AttributeStringBuild.GeneratedTitle(
 			nameof(CsvFileGenerator),
 			ProjectInfo.I18NVersion,
-			DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+			DateTime.Now
 		);
 
 	public void Initialize(IncrementalGeneratorInitializationContext context)

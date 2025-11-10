@@ -61,7 +61,7 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 			AttributeStringBuild.GeneratedTitle(
 				nameof(ObservablePropertyGenerator),
 				ProjectInfo.MvvmVersion,
-				DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+				DateTime.Now
 			)
 		);
 		if (namespaceName is not null)
