@@ -11,7 +11,7 @@
 		{
 			"name": "MvvmVersion",
 			"type": "string",
-			"value": "1.0.7-dev5",
+			"value": "0.2.6-dev2",
 			"options": {
 				"target": "mvvm"
 			}
@@ -19,7 +19,7 @@
 		{
 			"name": "I18NVersion",
 			"type": "string",
-			"value": "0.2.6-dev2",
+			"value": "1.0.7-dev5",
 			"options": {
 				"target": "i18n"
 			}
