@@ -362,7 +362,7 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-.vs/
+
 .idea/
 .vscode/
 .venv/
@@ -370,3 +370,4 @@ bin/
 obj/
 output/
 packages/
+src/ProjectInfo.cs
