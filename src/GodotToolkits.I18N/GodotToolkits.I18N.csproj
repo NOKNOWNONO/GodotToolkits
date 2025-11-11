@@ -1,27 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net9.0;</TargetFrameworks>
-		<IsPackable>true</IsPackable>
-		<RootNamespace>GodotToolkits.I18N</RootNamespace>
-		<IncludeBuiltProjectOutput>false</IncludeBuiltProjectOutput>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<!-- Nuget Package -->
-		<Version>0.2.6-dev2</Version>
-		<PackageTags>Godot;dotnet;csharp;.NET;roslyn;</PackageTags>
-		<Description>一个用与给Csv文件生成翻译资源的工具.</Description>
-	</PropertyGroup>
-	<ItemGroup>
-		<ProjectReference
-			Include="..\GodotToolkits.I18N.Generator\GodotToolkits.I18N.Generator.csproj"
-			PrivateAssets="All"
-		/>
-	</ItemGroup>
-	<ItemGroup Label="Package">
-		<None
-			Include="../../output/bin/$(AssemblyName).Generator/$(Configuration)/netstandard2.0/*.dll"
-			PackagePath="analyzers/dotnet/cs"
-			Pack="true"
-			Visible="false"
-		/>
-	</ItemGroup>
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net9.0;</TargetFrameworks>
+    <IsPackable>true</IsPackable>
+    <RootNamespace>GodotToolkits.I18N</RootNamespace>
+    <IncludeBuiltProjectOutput>false</IncludeBuiltProjectOutput>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <!-- Nuget Package -->
+    <Version>0.2.5</Version>
+    <PackageTags>Godot;dotnet;csharp;.NET;roslyn;</PackageTags>
+    <Description>一个用与给Csv文件生成翻译资源的工具.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GodotToolkits.I18N.Generator\GodotToolkits.I18N.Generator.csproj" PrivateAssets="All" />
+  </ItemGroup>
+  <ItemGroup Label="Package">
+    <None Include="../../output/bin/$(AssemblyName).Generator/$(Configuration)/netstandard2.0/*.dll" PackagePath="analyzers/dotnet/cs" Pack="true" Visible="false" />
+  </ItemGroup>
 </Project>
