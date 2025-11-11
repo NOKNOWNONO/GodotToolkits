@@ -11,8 +11,7 @@ namespace InfoSet;
 public static class Program
 {
 	private static readonly string _rootPath = Path.Combine(
-		Environment.CurrentDirectory,
-		"../../../../../"
+		Environment.CurrentDirectory
 	);
 
 	public static string GeneratedTitle(string generator, DateTime time)
