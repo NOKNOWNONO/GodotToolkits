@@ -26,12 +26,12 @@
 		}
 	],
 	"targets": {
-		"mvvm": {
+		"i18n": {
 			"type": "csproj",
 			"file_path": "src/GodotToolkits.I18N/GodotToolkits.I18N.csproj",
 			"path": ["PropertyGroup", "Version", "$Value"]
 		},
-		"i18n": {
+		"mvvm": {
 			"type": "csproj",
 			"file_path": "src/GodotToolkits.MVVM/GodotToolkits.MVVM.csproj",
 			"path": ["PropertyGroup", "Version", "$Value"]
