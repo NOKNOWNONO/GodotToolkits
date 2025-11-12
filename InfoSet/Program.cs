@@ -107,7 +107,10 @@ public static class TargetExecutor
 		foreach (var path in targetInfo.Path)
 		{
 			if (path == "$Value")
-				element?.Value = value;
+			{
+				if (element is not null)
+					element.Value = value;
+			}
 			else
 				element = element?.Element(path);
 			if (element is null)
