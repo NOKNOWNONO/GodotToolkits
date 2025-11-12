@@ -1,18 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net9.0;</TargetFrameworks>
-    <IsPackable>true</IsPackable>
-    <RootNamespace>GodotToolkits.MVVM</RootNamespace>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <!-- Nuget Package -->
-    <Version>1.0.7</Version>
-    <PackageTags>Godot;MVVM;csharp;roslyn;dotnet;.net;</PackageTags>
-    <Description>一个参照CommunityToolkit.Mvvm制作的给Godot使用的MVVM工具</Description>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="../GodotToolkits.MVVM.Generator/GodotToolkits.MVVM.Generator.csproj" PrivateAssets="All" />
-  </ItemGroup>
-  <ItemGroup Label="Package">
-    <None Include="../../output/bin/$(AssemblyName).Generator/$(Configuration)/netstandard2.0/*.dll" PackagePath="analyzers/dotnet/cs" Pack="true" Visible="false" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;net9.0;</TargetFrameworks>
+		<IsPackable>true</IsPackable>
+		<RootNamespace>GodotToolkits.MVVM</RootNamespace>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<!-- Nuget Package -->
+		<Version>1.0.7</Version>
+		<PackageTags>Godot;MVVM;csharp;roslyn;dotnet;.net;</PackageTags>
+		<Description>一个参照CommunityToolkit.Mvvm制作的给Godot使用的MVVM工具</Description>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference
+			Include="../GodotToolkits.MVVM.Generator/GodotToolkits.MVVM.Generator.csproj"
+			PrivateAssets="All"
+		/>
+	</ItemGroup>
+	<ItemGroup Label="Package">
+		<None
+			Include="../../output/bin/$(AssemblyName).Generator/$(Configuration)/netstandard2.0/*.dll"
+			PackagePath="analyzers/dotnet/cs"
+			Pack="true"
+			Visible="false"
+		/>
+	</ItemGroup>
 </Project>

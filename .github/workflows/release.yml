@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-release-specific:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     permissions:
       contents: write
 
@@ -19,17 +19,8 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - name: Restore i18n project
-        run: dotnet restore src/GodotToolkits.I18N/GodotToolkits.I18N.csproj
-
-      - name: Restore mvvm project
-        run: dotnet restore src/GodotToolkits.MVVM/GodotToolkits.MVVM.csproj
-
-      - name: Pack i18n project
-        run: dotnet pack src/GodotToolkits.I18N/GodotToolkits.I18N.csproj --configuration Release  --output ./packages
-
-      - name: Pack mvvm project
-        run: dotnet pack src/GodotToolkits.MVVM/GodotToolkits.MVVM.csproj --configuration Release  --output ./packages
+      - name: Build project
+        run: powershell ./build.ps1
 
       - name: Release project
         uses: softprops/action-gh-release@v2
