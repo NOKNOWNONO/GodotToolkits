@@ -1,35 +1,29 @@
-﻿//GeneratedTitle
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
-using global::System;
-using global::System.Collections;
-using global::System.Collections.Generic;
+namespace GodotToolkits.MVVM.Modules;
 
-namespace GodotToolkits.MVVM.Templates;
-
-public class TObservableDictionary<TKey, TValue>
-	: ICollection<KeyValuePair<TKey, TValue>>,
-		IEnumerable<KeyValuePair<TKey, TValue>>,
-		IEnumerable,
-		IDictionary<TKey, TValue>,
-		ICollection,
+public class ObservableDictionary<TKey, TValue>
+	: IDictionary<TKey, TValue>,
 		IDictionary
+	where TKey : notnull
+	where TValue : notnull
 {
 	private readonly Dictionary<TKey, TValue> _dictionary = [];
 	public Action? DictionaryChanged;
 
-	//GeneratedCode
 	public bool Contains(object key)
 	{
 		return ((IDictionary)_dictionary).Contains(key);
 	}
 
-	//GeneratedCode
 	IDictionaryEnumerator IDictionary.GetEnumerator()
 	{
 		return ((IDictionary)_dictionary).GetEnumerator();
 	}
 
-	//GeneratedCode
 	public void Remove(object key)
 	{
 		((IDictionary)_dictionary).Remove(key);
@@ -37,7 +31,6 @@ public class TObservableDictionary<TKey, TValue>
 
 	public bool IsFixedSize => ((IDictionary)_dictionary).IsFixedSize;
 
-	//GeneratedCode
 	IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<
 		KeyValuePair<TKey, TValue>
 	>.GetEnumerator()
@@ -45,38 +38,32 @@ public class TObservableDictionary<TKey, TValue>
 		return _dictionary.GetEnumerator();
 	}
 
-	//GeneratedCode
 	IEnumerator IEnumerable.GetEnumerator()
 	{
 		return ((IEnumerable)_dictionary).GetEnumerator();
 	}
 
-	//GeneratedCode
 	public void Add(KeyValuePair<TKey, TValue> item)
 	{
 		((ICollection<KeyValuePair<TKey, TValue>>)_dictionary).Add(item);
 		DictionaryChanged?.Invoke();
 	}
 
-	//GeneratedCode
-	public void Add(object key, object value)
+	public void Add(object key, object? value)
 	{
 		((IDictionary)_dictionary).Add(key, value);
 	}
 
-	//GeneratedCode
 	void IDictionary.Clear()
 	{
 		_dictionary.Clear();
 	}
 
-	//GeneratedCode
 	void ICollection<KeyValuePair<TKey, TValue>>.Clear()
 	{
 		_dictionary.Clear();
 	}
 
-	//GeneratedCode
 	public bool Contains(KeyValuePair<TKey, TValue> item)
 	{
 		return ((ICollection<KeyValuePair<TKey, TValue>>)_dictionary).Contains(
@@ -84,7 +71,6 @@ public class TObservableDictionary<TKey, TValue>
 		);
 	}
 
-	//GeneratedCode
 	public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
 	{
 		((ICollection<KeyValuePair<TKey, TValue>>)_dictionary).CopyTo(
@@ -93,7 +79,6 @@ public class TObservableDictionary<TKey, TValue>
 		);
 	}
 
-	//GeneratedCode
 	public bool Remove(KeyValuePair<TKey, TValue> item)
 	{
 		var result = (
@@ -103,7 +88,6 @@ public class TObservableDictionary<TKey, TValue>
 		return result;
 	}
 
-	//GeneratedCode
 	public void CopyTo(Array array, int index)
 	{
 		((ICollection)_dictionary).CopyTo(array, index);
@@ -117,7 +101,7 @@ public class TObservableDictionary<TKey, TValue>
 
 	public bool IsReadOnly => false;
 
-	public object this[object key]
+	public object? this[object key]
 	{
 		get => ((IDictionary)_dictionary)[key];
 		set
@@ -127,20 +111,17 @@ public class TObservableDictionary<TKey, TValue>
 		}
 	}
 
-	//GeneratedCode
 	public void Add(TKey key, TValue value)
 	{
 		_dictionary.Add(key, value);
 		DictionaryChanged?.Invoke();
 	}
 
-	//GeneratedCode
 	public bool ContainsKey(TKey key)
 	{
 		return _dictionary.ContainsKey(key);
 	}
 
-	//GeneratedCode
 	public bool Remove(TKey key)
 	{
 		var result = _dictionary.Remove(key);
@@ -148,10 +129,15 @@ public class TObservableDictionary<TKey, TValue>
 		return result;
 	}
 
-	//GeneratedCode
 	public bool TryGetValue(TKey key, out TValue value)
 	{
-		return _dictionary.TryGetValue(key, out value);
+		if (_dictionary.TryGetValue(key, out var v))
+		{
+			value = v;
+			return true;
+		}
+		value = default!;
+		return false;
 	}
 
 	public TValue this[TKey key]

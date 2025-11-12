@@ -1,4 +1,5 @@
 <Solution>
+	<Project Path="InfoSet\InfoSet.csproj" Type="Classic C#" />
 	<Project
 		Path="samples\GodotToolkits.I18N.Sample\GodotToolkits.I18N.Sample.csproj"
 		Type="Classic C#"
@@ -7,8 +8,17 @@
 		Path="samples\GodotToolkits.MVVM.Sample\GodotToolkits.MVVM.Sample.csproj"
 		Type="Classic C#"
 	/>
+	<Project
+		Path="src\GodotToolkits.I18N.Generator\GodotToolkits.I18N.Generator.csproj"
+		Type="Classic C#"
+	/>
 	<Project Path="src\GodotToolkits.I18N\GodotToolkits.I18N.csproj" Type="Classic C#" />
+	<Project
+		Path="src\GodotToolkits.MVVM.Generator\GodotToolkits.MVVM.Generator.csproj"
+		Type="Classic C#"
+	/>
 	<Project Path="src\GodotToolkits.MVVM\GodotToolkits.MVVM.csproj" Type="Classic C#" />
+	<Project Path="src\GodotToolkits.Utils\GodotToolkits.Utils.csproj" Type="Classic C#" />
 	<Project
 		Path="tests\GodotToolkits.I18N.Tests\GodotToolkits.I18N.Tests.csproj"
 		Type="Classic C#"

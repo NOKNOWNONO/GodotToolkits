@@ -1,13 +1,13 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Text;
-using GodotToolkits.MVVM.Generators.Modules;
+using GodotToolkits.Utils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Utils;
 using ProjectInfo = Utils.ProjectInfo;
 
-namespace GodotToolkits.MVVM.Generators;
+namespace GodotToolkits.MVVM.Generator.Generators;
 
 [Generator(LanguageNames.CSharp)]
 public sealed class ObservablePropertyGenerator : IIncrementalGenerator
@@ -15,7 +15,7 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 	public static readonly string GeneratedCode =
 		AttributeStringBuild.GeneratedCode(
 			$"{ProjectInfo.Title}.Generators.ObservablePropertyGenerator",
-			ProjectInfo.Version
+			ProjectInfo.MvvmVersion
 		);
 
 	public const string FullDictionary =
@@ -35,7 +35,7 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 				c.ChildNodes()
 					.OfType<FieldDeclarationSyntax>()
 					.Any(static f =>
-						f.HasAttribute(ObservableProperty.AttributeName)
+						f.HasAttribute(Common.ObservablePropertyAttributeName)
 					)
 			)
 			.Combine(context.CompilationProvider);
@@ -54,10 +54,16 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 		var semanticModel = compilation.GetSemanticModel(node.SyntaxTree);
 		var fields = node.ChildNodes()
 			.OfType<FieldDeclarationSyntax>()
-			.Where(n => n.HasAttribute(ObservableProperty.AttributeName));
+			.Where(n => n.HasAttribute(Common.ObservablePropertyAttributeName));
 
 		var classBuilder = new StringBuilder();
-		classBuilder.AppendLine(AttributeStringBuild.GeneratedTitle);
+		classBuilder.AppendLine(
+			AttributeStringBuild.GeneratedTitle(
+				nameof(ObservablePropertyGenerator),
+				ProjectInfo.MvvmVersion,
+				DateTime.Now
+			)
+		);
 		if (namespaceName is not null)
 			classBuilder.AppendLine($"namespace {namespaceName};");
 		classBuilder.AppendLine("using global::System.Linq;");
@@ -65,7 +71,6 @@ public sealed class ObservablePropertyGenerator : IIncrementalGenerator
 		classBuilder.AppendLine("{");
 		foreach (var field in fields)
 		{
-			var variable = field.Declaration.Variables.First();
 			var typeInfo = semanticModel.GetTypeInfo(field.Declaration.Type);
 			var typeSymbol = typeInfo.Type;
 			if (typeSymbol == null)

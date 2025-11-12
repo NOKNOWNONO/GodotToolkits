@@ -1,4 +1,4 @@
-﻿using GodotToolkits.MVVM.Generators;
+﻿using GodotToolkits.MVVM.Generator.Generators;
 using Xunit;
 
 namespace GodotToolkits.MVVM.Tests.Generators;

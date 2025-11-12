@@ -1,0 +1,40 @@
+﻿{
+	"name": "ProjectInfo",
+	"output_path": "./src/ProjectInfo.cs",
+	"namespace": "Utils",
+	"properties": [
+		{
+			"name": "Title",
+			"type": "string",
+			"value": "GodotToolkits"
+		},
+		{
+			"name": "MvvmVersion",
+			"type": "string",
+			"value": "0.2.5",
+			"options": {
+				"target": "mvvm"
+			}
+		},
+		{
+			"name": "I18NVersion",
+			"type": "string",
+			"value": "1.0.7",
+			"options": {
+				"target": "i18n"
+			}
+		}
+	],
+	"targets": {
+		"mvvm": {
+			"type": "csproj",
+			"file_path": "src/GodotToolkits.I18N/GodotToolkits.I18N.csproj",
+			"path": ["PropertyGroup", "Version", "$Value"]
+		},
+		"i18n": {
+			"type": "csproj",
+			"file_path": "src/GodotToolkits.MVVM/GodotToolkits.MVVM.csproj",
+			"path": ["PropertyGroup", "Version", "$Value"]
+		}
+	}
+}

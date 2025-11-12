@@ -1,4 +1,5 @@
-﻿using GodotToolkits.I18N.Generators;
+﻿using GodotToolkits.I18N;
+using GodotToolkits.I18N.Generator.Generators;
 using Xunit;
 
 namespace GodotToolkits.I18N.Tests.Generators;

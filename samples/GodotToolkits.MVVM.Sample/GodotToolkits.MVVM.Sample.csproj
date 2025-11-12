@@ -5,13 +5,6 @@
 		<RootNamespace>GodotToolkits.MVVM.Sample</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference
-			Include="..\..\src\GodotToolkits.MVVM\GodotToolkits.MVVM.csproj"
-			OutputItemType="Analyzer"
-			ReferenceOutputAssembly="false"
-		/>
-	</ItemGroup>
-	<ItemGroup>
-		<None Remove="DDD.UbiquitousLanguageRegistry.txt" />
+		<PackageReference Include="GodotToolkits.MVVM" Version="*" />
 	</ItemGroup>
 </Project>

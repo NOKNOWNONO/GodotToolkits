@@ -1,18 +1,27 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using GodotToolkits.Utils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using ProjectInfo = Utils.ProjectInfo;
 
-namespace GodotToolkits.I18N.Generators;
+namespace GodotToolkits.I18N.Generator.Generators;
 
 [Generator(LanguageNames.CSharp)]
 public sealed class CsvFileGenerator : IIncrementalGenerator
 {
-	private readonly string _namespace = $"{ProjectInfo.Title}Extension";
-	private bool _generateCsvContentClass = false;
+	private readonly string _namespace = $"{ProjectInfo.Title}.I18NExtension";
+	private bool _generateCsvContentClass;
+
+	private readonly string _generatedCodeHeader =
+		AttributeStringBuild.GeneratedTitle(
+			nameof(CsvFileGenerator),
+			ProjectInfo.I18NVersion,
+			DateTime.Now
+		);
 
 	public void Initialize(IncrementalGeneratorInitializationContext context)
 	{
@@ -36,15 +45,20 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 			)
 		)
 			return;
-
-		var configPath = Path.Combine(projectDir, ".godotoolkits");
-		using StreamReader reader = new(configPath);
-		var text = reader.ReadToEnd();
-		var config = text.Split('\n')
-			.FirstOrDefault(l => l.StartsWith("GenerateContentClass"))
-			?.Split('=')[1];
-		if (bool.TryParse(config, out var generateCsvContentClass))
-			_generateCsvContentClass = generateCsvContentClass;
+		try
+		{
+			var configPath = Path.Combine(projectDir, ".godotoolkits");
+			using StreamReader reader = new(configPath);
+			var text = reader.ReadToEnd();
+			if (ConfigManager.TryParse(text, out var config))
+			{
+				_generateCsvContentClass = config!.GenerateContentClass;
+			}
+		}
+		catch (Exception)
+		{
+			_generateCsvContentClass = false;
+		}
 	}
 
 	private void GenerateCode(
@@ -68,20 +82,21 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 			$"{fileName}.Index.Generated.cs",
 			BuildIndexClass(fileName, indexes, _namespace)
 		);
-		if (_generateCsvContentClass)
-			context.AddSource(
-				$"{fileName}.Generated.cs",
-				BuildContentClass(fileName, GetCsvData(lines), _namespace)
-			);
+		context.AddSource(
+			$"{fileName}.Generated.cs",
+			BuildContentClass(fileName, GetCsvData(lines), _namespace)
+		);
 	}
 
-	public static string BuildContentClass(
+	private string BuildContentClass(
 		string className,
 		List<CsvContent> data,
 		string? @namespace = null
 	)
 	{
 		var code = new StringBuilder();
+		code.AppendLine(_generatedCodeHeader);
+		code.AppendLine($"#if {_generateCsvContentClass}");
 		if (!string.IsNullOrEmpty(@namespace))
 			code.AppendLine($"namespace {@namespace};");
 		code.AppendLine("using global::System.Collections.Generic;");
@@ -116,16 +131,18 @@ public sealed class CsvFileGenerator : IIncrementalGenerator
 		}
 
 		code.AppendLine("}");
+		code.AppendLine("#endif");
 		return code.ToString();
 	}
 
-	public static string BuildIndexClass(
+	private string BuildIndexClass(
 		string className,
 		List<string> indexes,
 		string? @namespace = null
 	)
 	{
 		var code = new StringBuilder();
+		code.AppendLine(_generatedCodeHeader);
 		if (!string.IsNullOrEmpty(@namespace))
 			code.AppendLine($"namespace {@namespace};");
 		code.AppendLine();
